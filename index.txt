@@ -1,17 +1,20 @@
 1:"$Sreact.fragment"
-2:I[5560,["816","static/chunks/b5f12c68-d3ea9eab273f28fd.js","434","static/chunks/434-9f88cc211d6e66f0.js","657","static/chunks/657-2e8261e17799b726.js","177","static/chunks/app/layout-1b88f26a8a64c81f.js"],""]
-3:I[8920,["816","static/chunks/b5f12c68-d3ea9eab273f28fd.js","434","static/chunks/434-9f88cc211d6e66f0.js","657","static/chunks/657-2e8261e17799b726.js","177","static/chunks/app/layout-1b88f26a8a64c81f.js"],"default"]
-4:I[2317,["816","static/chunks/b5f12c68-d3ea9eab273f28fd.js","434","static/chunks/434-9f88cc211d6e66f0.js","657","static/chunks/657-2e8261e17799b726.js","177","static/chunks/app/layout-1b88f26a8a64c81f.js"],""]
-5:I[8277,["816","static/chunks/b5f12c68-d3ea9eab273f28fd.js","434","static/chunks/434-9f88cc211d6e66f0.js","657","static/chunks/657-2e8261e17799b726.js","177","static/chunks/app/layout-1b88f26a8a64c81f.js"],"default"]
-c:I[6012,[],""]
-d:I[3690,[],""]
-e:I[7064,["816","static/chunks/b5f12c68-d3ea9eab273f28fd.js","434","static/chunks/434-9f88cc211d6e66f0.js","657","static/chunks/657-2e8261e17799b726.js","177","static/chunks/app/layout-1b88f26a8a64c81f.js"],"default"]
-10:I[6236,[],"OutletBoundary"]
-13:I[6236,[],"ViewportBoundary"]
-15:I[6236,[],"MetadataBoundary"]
-17:I[2691,[],""]
-:HL["/_next/static/css/a5266f8704fe6cf8.css","style"]
-6:T3e06,
+2:I[5560,["148","static/chunks/b281fec4-89f52f48b80fea50.js","816","static/chunks/b5f12c68-d3ea9eab273f28fd.js","434","static/chunks/434-28d2f3ac4c229793.js","657","static/chunks/657-bb97722b1c6b46a1.js","687","static/chunks/687-3562cf53a13d284c.js","177","static/chunks/app/layout-f6b7df2380269a43.js"],""]
+3:I[8920,["148","static/chunks/b281fec4-89f52f48b80fea50.js","816","static/chunks/b5f12c68-d3ea9eab273f28fd.js","434","static/chunks/434-28d2f3ac4c229793.js","657","static/chunks/657-bb97722b1c6b46a1.js","687","static/chunks/687-3562cf53a13d284c.js","177","static/chunks/app/layout-f6b7df2380269a43.js"],"default"]
+4:I[8457,["148","static/chunks/b281fec4-89f52f48b80fea50.js","816","static/chunks/b5f12c68-d3ea9eab273f28fd.js","434","static/chunks/434-28d2f3ac4c229793.js","657","static/chunks/657-bb97722b1c6b46a1.js","687","static/chunks/687-3562cf53a13d284c.js","177","static/chunks/app/layout-f6b7df2380269a43.js"],"default"]
+5:I[59,["148","static/chunks/b281fec4-89f52f48b80fea50.js","816","static/chunks/b5f12c68-d3ea9eab273f28fd.js","434","static/chunks/434-28d2f3ac4c229793.js","657","static/chunks/657-bb97722b1c6b46a1.js","687","static/chunks/687-3562cf53a13d284c.js","177","static/chunks/app/layout-f6b7df2380269a43.js"],"default"]
+6:I[2317,["148","static/chunks/b281fec4-89f52f48b80fea50.js","816","static/chunks/b5f12c68-d3ea9eab273f28fd.js","434","static/chunks/434-28d2f3ac4c229793.js","657","static/chunks/657-bb97722b1c6b46a1.js","687","static/chunks/687-3562cf53a13d284c.js","177","static/chunks/app/layout-f6b7df2380269a43.js"],""]
+7:I[8277,["148","static/chunks/b281fec4-89f52f48b80fea50.js","816","static/chunks/b5f12c68-d3ea9eab273f28fd.js","434","static/chunks/434-28d2f3ac4c229793.js","657","static/chunks/657-bb97722b1c6b46a1.js","687","static/chunks/687-3562cf53a13d284c.js","177","static/chunks/app/layout-f6b7df2380269a43.js"],"default"]
+e:I[8502,["148","static/chunks/b281fec4-89f52f48b80fea50.js","816","static/chunks/b5f12c68-d3ea9eab273f28fd.js","434","static/chunks/434-28d2f3ac4c229793.js","657","static/chunks/657-bb97722b1c6b46a1.js","687","static/chunks/687-3562cf53a13d284c.js","177","static/chunks/app/layout-f6b7df2380269a43.js"],"default"]
+f:I[6012,[],""]
+10:I[3690,[],""]
+11:I[7064,["148","static/chunks/b281fec4-89f52f48b80fea50.js","816","static/chunks/b5f12c68-d3ea9eab273f28fd.js","434","static/chunks/434-28d2f3ac4c229793.js","657","static/chunks/657-bb97722b1c6b46a1.js","687","static/chunks/687-3562cf53a13d284c.js","177","static/chunks/app/layout-f6b7df2380269a43.js"],"default"]
+13:I[6236,[],"OutletBoundary"]
+16:I[6236,[],"ViewportBoundary"]
+18:I[6236,[],"MetadataBoundary"]
+1a:I[2691,[],""]
+:HL["/_next/static/css/ae6f19c16f9a4dc5.css","style"]
+8:T3e06,
 ## React Server Component
 
 RSC(React Server Component)는 서버에서만 실행되는 컴포넌트를 말한다. 즉, 리액트 컴포넌트 내에서 바로 데이터베이스 쿼리를 작성하는 것과 같은 작업을 할 수 있다.
@@ -141,7 +144,7 @@ RSC는 단순히 새로운 렌더링 기술이 아니라, 기존 클라이언트
 
 - [Server Components](https://react.dev/reference/rsc)
 - [One Roundtrip Per Navigation](https://overreacted.io/one-roundtrip-per-navigation/)
-7:T4936,
+9:T4936,
 ## 들어가며
 
 과거에 [전역 상태를 사용하는 기준이 있으신가요?](https://frontend-fundamentals.com/code-quality/code/detail/?id=5) 라는 글을 보면서, 많은 사람들이 `Context API`의 성능 이슈 등으로 인해 다른 전역 상태 관리 도구를 선호하는 현상에 대해 다시금 고민하게 되었다. 나 역시 비슷한 경험을 했기에, 이 글에서는 `Context API`를 둘러싼 흔한 오해들을 먼저 짚어보고, 나아가 강점인 의존성 주입 패턴과, 상태 관리 시의 성능을 최적화하는 방법까지 함께 살펴보려 한다.
@@ -405,7 +408,7 @@ function useContext<U>(selector?: (state: ContextType) => U): ContextType | U {
 - **앱 전반의 복잡한 전역 상태 관리**: `Zustand`, `Jotai` 등 상태 관리 라이브러리 단독 사용
 
 다른 글에서도 마지막에 이야기한 것처럼, 결국엔 **'언제, 어떻게'** 쓰는지가 중요하다.
-8:T17df,
+a:T17df,
 ## 싱글톤 패턴
 
 소프트웨어 개발에서 자주 듣게 되는 디자인 패턴 중 하나가 싱글톤 패턴이다.
@@ -590,7 +593,7 @@ const userService = new UserService(logger);
 그래서 싱글톤 패턴을 사용할 때는 주의가 필요하다. DI를 활용하면 싱글톤 패턴의 단점을 보완할 수 있다. 의존성을 외부에서 주입받으면 결합도를 낮추고 테스트와 확장성을 높일 수 있다.
 
 결국 언제, 어떻게 쓰느냐가 중요하다.
-9:T483e,
+b:T483e,
 import { PhotoGrid } from '@/widget/photo-grid';
 
 원래 이 글을 더 빨리 작성하려 했는데, 미루고 미루다 이제야 쓰게 되었다.
@@ -793,7 +796,7 @@ import { PhotoGrid } from '@/widget/photo-grid';
 이번 네이버 면접 기간에서 첫 번째 날에 면접을 보게 되어서 준비 기간이 길진 못한 점이 조금은 아쉽지만, 아쉬운대로 네이버 기술 역량 인터뷰를 진행했고 현재는 결과를 기다리고 있다.
 
 좋은 결과가 있으면 좋겠다.
-a:T2ad3,
+c:T2ad3,
 팀원들과 함께 개발하던 중, 특이한 현상을 발견했다.
 백엔드에서 ORM으로 `prisma`를 사용하고 있는 상황이였다. `repository` 레이어에서 데이터베이스에 레코드를 생성하기 위해서 아래 같이 코드를 작성했다.
 
@@ -1033,7 +1036,7 @@ f1();
 - [PrismaPromise](https://github.com/prisma/prisma/blob/main/packages/client/src/runtime/core/request/PrismaPromise.ts#L32)
 - [createPrismaPromise](https://github.com/prisma/prisma/blob/38de36b93b6de7088c483b30e7d03407c29d7950/packages/client/src/runtime/core/request/createPrismaPromise.ts#L14)
 - [createLockCountPromise](https://github.com/prisma/prisma/blob/38de36b93b6de7088c483b30e7d03407c29d7950/packages/client/src/runtime/core/transaction/utils/createLockCountPromise.ts#L11_)
-b:T3632,
+d:T3632,
 ## Zustand
 
 > A small, fast, and scalable bearbones state management solution. Zustand has a comfy API based on hooks. It isn't boilerplatey or opinionated, but has enough convention to be explicit and flux-like.
@@ -1381,9 +1384,9 @@ export const create = (<T>(createState: StateCreator<T, [], []> | undefined) =>
 ## 마지막
 
 Zustand는 간단하면서도 유연한 API로 상태를 관리하며, 내부적으로 pub/sub 패턴과 불변 상태 업데이트 로직을 사용해 상태 관리를 제공한다. 또한, 리액트의 `useSyncExternalStore` 훅을 통해서 리액트에서의 렌더링을 제공하고 있다.
-0:{"P":null,"b":"hr2wRfpyGp4ntO5ZvYR0o","p":"","c":["",""],"i":false,"f":[[["",{"children":["__PAGE__",{}]},"$undefined","$undefined",true],["",["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/a5266f8704fe6cf8.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","html",null,{"lang":"ko-kr","className":"h-full w-full","children":[["$","head",null,{"children":[["$","meta",null,{"name":"google-site-verification","content":"ktuwDBkR2dZGl0nMI1lDu6kIdrkuAE-u8G8Gp5vwzS0"}],[["$","$L2",null,{"src":"https://www.googletagmanager.com/gtag/js?id=G-ETL2T0X211","strategy":"afterInteractive"}],["$","$L2",null,{"id":"google-analytics","strategy":"afterInteractive","children":"\n          window.dataLayer = window.dataLayer || [];\n          function gtag(){dataLayer.push(arguments);}\n          gtag('js', new Date());\n          gtag('config', 'G-ETL2T0X211');\n        "}]],["$","link",null,{"rel":"stylesheet","href":"https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css"}],["$","link",null,{"rel":"stylesheet","href":"https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css"}],["$","link",null,{"rel":"stylesheet","as":"style","crossOrigin":"anonymous","href":"https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"}]]}],["$","$L3",null,{"children":["$","body",null,{"className":"h-full w-full overflow-auto font-sans","children":["$","div",null,{"className":"flex min-h-full flex-col gap-4","children":[["$","header",null,{"className":"mt-4 h-fit w-full px-4","children":["$","div",null,{"className":"mx-auto h-full max-w-3xl","children":["$","div",null,{"className":"flex h-full flex-row items-center justify-between","children":[["$","$L4",null,{"href":"/","className":"font-[\"Hack\"] text-xl font-bold text-slate-900","children":"@cjeongmin"}],["$","nav",null,{"className":"mt-1 flex flex-row items-center gap-2","children":[["$","$L4",null,{"href":"/","className":"mr-4 text-slate-600 hover:text-slate-900","children":"Home"}],["$","$L4",null,{"href":"/about","className":"mr-4 text-slate-600 hover:text-slate-900","children":"About"}],["$","$L5",null,{"posts":[{"content":"$6","date":"2025. 06. 14","description":"RSC가 해결하려는 문제","fileName":"react-server-component","tags":"$undefined","thumbnail":"$undefined","title":"React Server Component"},{"content":"$7","date":"2025. 06. 06","description":"Context API에 대한 고찰","fileName":"react-context-api","tags":"$undefined","thumbnail":"$undefined","title":"Context API: 의존성 주입부터 상태 관리 최적화까지"},{"content":"$8","date":"2025. 04. 27","description":"싱글톤 패턴과 의존성 주입으로 단점 보완하기","fileName":"singleton-pattern","tags":"$undefined","thumbnail":"$undefined","title":"싱글톤 패턴, 의존성 주입"},{"content":"$9","date":"2025. 04. 17","description":"입학부터 졸업까지","fileName":"university-graduation","tags":"$undefined","thumbnail":"$undefined","title":"졸업, 그리고 여러가지"},{"content":"$a","date":"2025. 02. 10","description":"Prisma의 Promise 알아보기","fileName":"prisma-promise-with-thenable","tags":"$undefined","thumbnail":"$undefined","title":"PrismaPromise (with. Thenable)"},{"content":"$b","date":"2025. 02. 03","description":"Zustand 뜯어보기","fileName":"zustand","tags":"$undefined","thumbnail":"$undefined","title":"Zustand"}]}]]}]]}]}]}],["$","hr",null,{"className":"w-full"}],["$","main",null,{"className":"flex-1 px-4","children":["$","div",null,{"className":"mx-auto h-full max-w-3xl","children":["$","$Lc",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$Ld",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]],[]],"forbidden":"$undefined","unauthorized":"$undefined"}]}]}],["$","hr",null,{"className":"w-full"}],["$","footer",null,{"className":"mb-4 h-8 w-full px-4","children":["$","div",null,{"className":"mx-auto flex h-full max-w-3xl items-center justify-center","children":["$","div",null,{"className":"text-sm text-gray-600","children":"© 2025 cjeongmin"}]}]}],["$","$Le",null,{}]]}]}]}]]}]]}],{"children":["__PAGE__",["$","$1","c",{"children":["$Lf","$undefined",null,["$","$L10",null,{"children":["$L11","$L12",null]}]]}],{},null,false]},null,false],["$","$1","h",{"children":[null,["$","$1","RYg4seJncJwtmunQHThap",{"children":[["$","$L13",null,{"children":"$L14"}],null]}],["$","$L15",null,{"children":"$L16"}]]}],false]],"m":"$undefined","G":["$17","$undefined"],"s":false,"S":true}
-18:I[6075,["434","static/chunks/434-9f88cc211d6e66f0.js","657","static/chunks/657-2e8261e17799b726.js","974","static/chunks/app/page-24ae3ee21a45e3f6.js"],"default"]
-19:T3e06,
+0:{"P":null,"b":"6wms6WHs01IjhJ31ujB59","p":"","c":["",""],"i":false,"f":[[["",{"children":["__PAGE__",{}]},"$undefined","$undefined",true],["",["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/ae6f19c16f9a4dc5.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","html",null,{"lang":"ko-kr","className":"h-full w-full","suppressHydrationWarning":true,"children":[["$","head",null,{"children":[["$","meta",null,{"name":"google-site-verification","content":"ktuwDBkR2dZGl0nMI1lDu6kIdrkuAE-u8G8Gp5vwzS0"}],[["$","$L2",null,{"src":"https://www.googletagmanager.com/gtag/js?id=G-ETL2T0X211","strategy":"afterInteractive"}],["$","$L2",null,{"id":"google-analytics","strategy":"afterInteractive","children":"\n          window.dataLayer = window.dataLayer || [];\n          function gtag(){dataLayer.push(arguments);}\n          gtag('js', new Date());\n          gtag('config', 'G-ETL2T0X211');\n        "}]],["$","link",null,{"rel":"stylesheet","href":"https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css"}],["$","link",null,{"rel":"stylesheet","as":"style","crossOrigin":"anonymous","href":"https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"}],["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\n    (function() {\n      try {\n        const theme = localStorage.getItem('theme') || 'light';\n        const isDark = theme === 'dark';\n        \n        document.documentElement.classList.toggle('dark', isDark);\n      } catch (e) {\n        document.documentElement.classList.remove('dark');\n      }\n    })();\n  "}}]]}],["$","$L3",null,{"children":["$","body",null,{"className":"h-full w-full overflow-auto font-sans","children":["$","$L4",null,{"children":[["$","$L5",null,{}],["$","div",null,{"className":"flex min-h-full flex-col gap-4","children":[["$","header",null,{"className":"mt-4 h-fit w-full px-4","children":["$","div",null,{"className":"mx-auto h-full max-w-3xl","children":["$","div",null,{"className":"flex h-full flex-row items-center justify-between","children":[["$","$L6",null,{"href":"/","className":"text-text-primary font-[\"Hack\"] text-xl font-bold","children":"@cjeongmin"}],["$","nav",null,{"className":"mt-1 flex flex-row items-center gap-4","children":[["$","$L6",null,{"href":"/","className":"text-text-secondary hover:text-text-primary","children":"Home"}],["$","$L6",null,{"href":"/about","className":"text-text-secondary hover:text-text-primary","children":"About"}],["$","$L7",null,{"posts":[{"content":"$8","date":"2025. 06. 14","description":"RSC가 해결하려는 문제","fileName":"react-server-component","tags":"$undefined","thumbnail":"$undefined","title":"React Server Component"},{"content":"$9","date":"2025. 06. 06","description":"Context API에 대한 고찰","fileName":"react-context-api","tags":"$undefined","thumbnail":"$undefined","title":"Context API: 의존성 주입부터 상태 관리 최적화까지"},{"content":"$a","date":"2025. 04. 27","description":"싱글톤 패턴과 의존성 주입으로 단점 보완하기","fileName":"singleton-pattern","tags":"$undefined","thumbnail":"$undefined","title":"싱글톤 패턴, 의존성 주입"},{"content":"$b","date":"2025. 04. 17","description":"입학부터 졸업까지","fileName":"university-graduation","tags":"$undefined","thumbnail":"$undefined","title":"졸업, 그리고 여러가지"},{"content":"$c","date":"2025. 02. 10","description":"Prisma의 Promise 알아보기","fileName":"prisma-promise-with-thenable","tags":"$undefined","thumbnail":"$undefined","title":"PrismaPromise (with. Thenable)"},{"content":"$d","date":"2025. 02. 03","description":"Zustand 뜯어보기","fileName":"zustand","tags":"$undefined","thumbnail":"$undefined","title":"Zustand"}]}],["$","$Le",null,{}]]}]]}]}]}],["$","hr",null,{"className":"border-border-primary w-full border-t-[0.5px]"}],["$","main",null,{"className":"flex-1 px-4","children":["$","div",null,{"className":"mx-auto h-full max-w-3xl","children":["$","$Lf",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L10",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]],[]],"forbidden":"$undefined","unauthorized":"$undefined"}]}]}],["$","hr",null,{"className":"border-border-primary w-full border-t-[0.5px]"}],["$","footer",null,{"className":"mb-4 h-8 w-full px-4","children":["$","div",null,{"className":"mx-auto flex h-full max-w-3xl items-center justify-center","children":["$","div",null,{"className":"text-text-muted text-sm","children":"© 2025 cjeongmin"}]}]}],["$","$L11",null,{}]]}]]}]}]}]]}]]}],{"children":["__PAGE__",["$","$1","c",{"children":["$L12","$undefined",null,["$","$L13",null,{"children":["$L14","$L15",null]}]]}],{},null,false]},null,false],["$","$1","h",{"children":[null,["$","$1","jbKAi-dSXeChTXUWq56Qw",{"children":[["$","$L16",null,{"children":"$L17"}],null]}],["$","$L18",null,{"children":"$L19"}]]}],false]],"m":"$undefined","G":["$1a","$undefined"],"s":false,"S":true}
+1b:I[6075,["434","static/chunks/434-28d2f3ac4c229793.js","657","static/chunks/657-bb97722b1c6b46a1.js","974","static/chunks/app/page-46d94d7054c44d22.js"],"default"]
+1c:T3e06,
 ## React Server Component
 
 RSC(React Server Component)는 서버에서만 실행되는 컴포넌트를 말한다. 즉, 리액트 컴포넌트 내에서 바로 데이터베이스 쿼리를 작성하는 것과 같은 작업을 할 수 있다.
@@ -1513,7 +1516,7 @@ RSC는 단순히 새로운 렌더링 기술이 아니라, 기존 클라이언트
 
 - [Server Components](https://react.dev/reference/rsc)
 - [One Roundtrip Per Navigation](https://overreacted.io/one-roundtrip-per-navigation/)
-1a:T4936,
+1d:T4936,
 ## 들어가며
 
 과거에 [전역 상태를 사용하는 기준이 있으신가요?](https://frontend-fundamentals.com/code-quality/code/detail/?id=5) 라는 글을 보면서, 많은 사람들이 `Context API`의 성능 이슈 등으로 인해 다른 전역 상태 관리 도구를 선호하는 현상에 대해 다시금 고민하게 되었다. 나 역시 비슷한 경험을 했기에, 이 글에서는 `Context API`를 둘러싼 흔한 오해들을 먼저 짚어보고, 나아가 강점인 의존성 주입 패턴과, 상태 관리 시의 성능을 최적화하는 방법까지 함께 살펴보려 한다.
@@ -1777,7 +1780,7 @@ function useContext<U>(selector?: (state: ContextType) => U): ContextType | U {
 - **앱 전반의 복잡한 전역 상태 관리**: `Zustand`, `Jotai` 등 상태 관리 라이브러리 단독 사용
 
 다른 글에서도 마지막에 이야기한 것처럼, 결국엔 **'언제, 어떻게'** 쓰는지가 중요하다.
-1b:T17df,
+1e:T17df,
 ## 싱글톤 패턴
 
 소프트웨어 개발에서 자주 듣게 되는 디자인 패턴 중 하나가 싱글톤 패턴이다.
@@ -1962,7 +1965,7 @@ const userService = new UserService(logger);
 그래서 싱글톤 패턴을 사용할 때는 주의가 필요하다. DI를 활용하면 싱글톤 패턴의 단점을 보완할 수 있다. 의존성을 외부에서 주입받으면 결합도를 낮추고 테스트와 확장성을 높일 수 있다.
 
 결국 언제, 어떻게 쓰느냐가 중요하다.
-1c:T483e,
+1f:T483e,
 import { PhotoGrid } from '@/widget/photo-grid';
 
 원래 이 글을 더 빨리 작성하려 했는데, 미루고 미루다 이제야 쓰게 되었다.
@@ -2165,7 +2168,7 @@ import { PhotoGrid } from '@/widget/photo-grid';
 이번 네이버 면접 기간에서 첫 번째 날에 면접을 보게 되어서 준비 기간이 길진 못한 점이 조금은 아쉽지만, 아쉬운대로 네이버 기술 역량 인터뷰를 진행했고 현재는 결과를 기다리고 있다.
 
 좋은 결과가 있으면 좋겠다.
-1d:T2ad3,
+20:T2ad3,
 팀원들과 함께 개발하던 중, 특이한 현상을 발견했다.
 백엔드에서 ORM으로 `prisma`를 사용하고 있는 상황이였다. `repository` 레이어에서 데이터베이스에 레코드를 생성하기 위해서 아래 같이 코드를 작성했다.
 
@@ -2405,7 +2408,7 @@ f1();
 - [PrismaPromise](https://github.com/prisma/prisma/blob/main/packages/client/src/runtime/core/request/PrismaPromise.ts#L32)
 - [createPrismaPromise](https://github.com/prisma/prisma/blob/38de36b93b6de7088c483b30e7d03407c29d7950/packages/client/src/runtime/core/request/createPrismaPromise.ts#L14)
 - [createLockCountPromise](https://github.com/prisma/prisma/blob/38de36b93b6de7088c483b30e7d03407c29d7950/packages/client/src/runtime/core/transaction/utils/createLockCountPromise.ts#L11_)
-1e:T3632,
+21:T3632,
 ## Zustand
 
 > A small, fast, and scalable bearbones state management solution. Zustand has a comfy API based on hooks. It isn't boilerplatey or opinionated, but has enough convention to be explicit and flux-like.
@@ -2753,8 +2756,8 @@ export const create = (<T>(createState: StateCreator<T, [], []> | undefined) =>
 ## 마지막
 
 Zustand는 간단하면서도 유연한 API로 상태를 관리하며, 내부적으로 pub/sub 패턴과 불변 상태 업데이트 로직을 사용해 상태 관리를 제공한다. 또한, 리액트의 `useSyncExternalStore` 훅을 통해서 리액트에서의 렌더링을 제공하고 있다.
-f:["$","div",null,{"className":"flex w-full flex-col gap-4","children":["$","div",null,{"className":"mt-4 grid w-full grid-cols-1 gap-8","children":[["$","$L18","React Server Component",{"post":{"content":"$19","date":"2025. 06. 14","description":"RSC가 해결하려는 문제","fileName":"react-server-component","tags":"$undefined","thumbnail":"$undefined","title":"React Server Component"}}],["$","$L18","Context API: 의존성 주입부터 상태 관리 최적화까지",{"post":{"content":"$1a","date":"2025. 06. 06","description":"Context API에 대한 고찰","fileName":"react-context-api","tags":"$undefined","thumbnail":"$undefined","title":"Context API: 의존성 주입부터 상태 관리 최적화까지"}}],["$","$L18","싱글톤 패턴, 의존성 주입",{"post":{"content":"$1b","date":"2025. 04. 27","description":"싱글톤 패턴과 의존성 주입으로 단점 보완하기","fileName":"singleton-pattern","tags":"$undefined","thumbnail":"$undefined","title":"싱글톤 패턴, 의존성 주입"}}],["$","$L18","졸업, 그리고 여러가지",{"post":{"content":"$1c","date":"2025. 04. 17","description":"입학부터 졸업까지","fileName":"university-graduation","tags":"$undefined","thumbnail":"$undefined","title":"졸업, 그리고 여러가지"}}],["$","$L18","PrismaPromise (with. Thenable)",{"post":{"content":"$1d","date":"2025. 02. 10","description":"Prisma의 Promise 알아보기","fileName":"prisma-promise-with-thenable","tags":"$undefined","thumbnail":"$undefined","title":"PrismaPromise (with. Thenable)"}}],["$","$L18","Zustand",{"post":{"content":"$1e","date":"2025. 02. 03","description":"Zustand 뜯어보기","fileName":"zustand","tags":"$undefined","thumbnail":"$undefined","title":"Zustand"}}]]}]}]
-14:[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]
-11:null
-12:null
-16:[["$","title","0",{"children":"cjeongmin"}],["$","meta","1",{"name":"description","content":"A blog by cjeongmin"}],["$","meta","2",{"property":"og:title","content":"cjeongmin"}],["$","meta","3",{"property":"og:description","content":"A blog by cjeongmin"}],["$","meta","4",{"property":"og:url","content":"https://cjeongmin.github.io/"}],["$","meta","5",{"property":"og:site_name","content":"cjeongmin"}],["$","meta","6",{"property":"og:locale","content":"ko_KR"}],["$","meta","7",{"property":"og:image","content":"https://cjeongmin.github.io/favicon.ico"}],["$","meta","8",{"property":"og:image:width","content":"1200"}],["$","meta","9",{"property":"og:image:height","content":"630"}],["$","meta","10",{"property":"og:image:alt","content":"cjeongmin blog"}],["$","meta","11",{"property":"og:type","content":"website"}],["$","meta","12",{"name":"twitter:card","content":"summary_large_image"}],["$","meta","13",{"name":"twitter:title","content":"cjeongmin"}],["$","meta","14",{"name":"twitter:description","content":"A blog by cjeongmin"}],["$","meta","15",{"name":"twitter:image","content":"https://cjeongmin.github.io/favicon.ico"}],["$","meta","16",{"name":"twitter:image:width","content":"1200"}],["$","meta","17",{"name":"twitter:image:height","content":"630"}],["$","meta","18",{"name":"twitter:image:alt","content":"cjeongmin blog"}],["$","link","19",{"rel":"icon","href":"/favicon.ico","type":"image/x-icon","sizes":"2267x2149"}]]
+12:["$","div",null,{"className":"flex w-full flex-col gap-4","children":["$","div",null,{"className":"mt-4 grid w-full grid-cols-1 gap-8","children":[["$","$L1b","React Server Component",{"post":{"content":"$1c","date":"2025. 06. 14","description":"RSC가 해결하려는 문제","fileName":"react-server-component","tags":"$undefined","thumbnail":"$undefined","title":"React Server Component"}}],["$","$L1b","Context API: 의존성 주입부터 상태 관리 최적화까지",{"post":{"content":"$1d","date":"2025. 06. 06","description":"Context API에 대한 고찰","fileName":"react-context-api","tags":"$undefined","thumbnail":"$undefined","title":"Context API: 의존성 주입부터 상태 관리 최적화까지"}}],["$","$L1b","싱글톤 패턴, 의존성 주입",{"post":{"content":"$1e","date":"2025. 04. 27","description":"싱글톤 패턴과 의존성 주입으로 단점 보완하기","fileName":"singleton-pattern","tags":"$undefined","thumbnail":"$undefined","title":"싱글톤 패턴, 의존성 주입"}}],["$","$L1b","졸업, 그리고 여러가지",{"post":{"content":"$1f","date":"2025. 04. 17","description":"입학부터 졸업까지","fileName":"university-graduation","tags":"$undefined","thumbnail":"$undefined","title":"졸업, 그리고 여러가지"}}],["$","$L1b","PrismaPromise (with. Thenable)",{"post":{"content":"$20","date":"2025. 02. 10","description":"Prisma의 Promise 알아보기","fileName":"prisma-promise-with-thenable","tags":"$undefined","thumbnail":"$undefined","title":"PrismaPromise (with. Thenable)"}}],["$","$L1b","Zustand",{"post":{"content":"$21","date":"2025. 02. 03","description":"Zustand 뜯어보기","fileName":"zustand","tags":"$undefined","thumbnail":"$undefined","title":"Zustand"}}]]}]}]
+17:[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]
+14:null
+15:null
+19:[["$","title","0",{"children":"cjeongmin"}],["$","meta","1",{"name":"description","content":"A blog by cjeongmin"}],["$","meta","2",{"property":"og:title","content":"cjeongmin"}],["$","meta","3",{"property":"og:description","content":"A blog by cjeongmin"}],["$","meta","4",{"property":"og:url","content":"https://cjeongmin.github.io/"}],["$","meta","5",{"property":"og:site_name","content":"cjeongmin"}],["$","meta","6",{"property":"og:locale","content":"ko_KR"}],["$","meta","7",{"property":"og:image","content":"https://cjeongmin.github.io/favicon.ico"}],["$","meta","8",{"property":"og:image:width","content":"1200"}],["$","meta","9",{"property":"og:image:height","content":"630"}],["$","meta","10",{"property":"og:image:alt","content":"cjeongmin blog"}],["$","meta","11",{"property":"og:type","content":"website"}],["$","meta","12",{"name":"twitter:card","content":"summary_large_image"}],["$","meta","13",{"name":"twitter:title","content":"cjeongmin"}],["$","meta","14",{"name":"twitter:description","content":"A blog by cjeongmin"}],["$","meta","15",{"name":"twitter:image","content":"https://cjeongmin.github.io/favicon.ico"}],["$","meta","16",{"name":"twitter:image:width","content":"1200"}],["$","meta","17",{"name":"twitter:image:height","content":"630"}],["$","meta","18",{"name":"twitter:image:alt","content":"cjeongmin blog"}],["$","link","19",{"rel":"icon","href":"/favicon.ico","type":"image/x-icon","sizes":"2267x2149"}]]
