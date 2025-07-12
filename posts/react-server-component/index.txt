@@ -5,17 +5,337 @@
 5:I[59,["148","static/chunks/b281fec4-89f52f48b80fea50.js","816","static/chunks/b5f12c68-d3ea9eab273f28fd.js","434","static/chunks/434-28d2f3ac4c229793.js","657","static/chunks/657-bb97722b1c6b46a1.js","687","static/chunks/687-3562cf53a13d284c.js","177","static/chunks/app/layout-f6b7df2380269a43.js"],"default"]
 6:I[2317,["148","static/chunks/b281fec4-89f52f48b80fea50.js","816","static/chunks/b5f12c68-d3ea9eab273f28fd.js","434","static/chunks/434-28d2f3ac4c229793.js","657","static/chunks/657-bb97722b1c6b46a1.js","687","static/chunks/687-3562cf53a13d284c.js","177","static/chunks/app/layout-f6b7df2380269a43.js"],""]
 7:I[8277,["148","static/chunks/b281fec4-89f52f48b80fea50.js","816","static/chunks/b5f12c68-d3ea9eab273f28fd.js","434","static/chunks/434-28d2f3ac4c229793.js","657","static/chunks/657-bb97722b1c6b46a1.js","687","static/chunks/687-3562cf53a13d284c.js","177","static/chunks/app/layout-f6b7df2380269a43.js"],"default"]
-e:I[8502,["148","static/chunks/b281fec4-89f52f48b80fea50.js","816","static/chunks/b5f12c68-d3ea9eab273f28fd.js","434","static/chunks/434-28d2f3ac4c229793.js","657","static/chunks/657-bb97722b1c6b46a1.js","687","static/chunks/687-3562cf53a13d284c.js","177","static/chunks/app/layout-f6b7df2380269a43.js"],"default"]
-f:I[6012,[],""]
-10:I[3690,[],""]
-11:I[7064,["148","static/chunks/b281fec4-89f52f48b80fea50.js","816","static/chunks/b5f12c68-d3ea9eab273f28fd.js","434","static/chunks/434-28d2f3ac4c229793.js","657","static/chunks/657-bb97722b1c6b46a1.js","687","static/chunks/687-3562cf53a13d284c.js","177","static/chunks/app/layout-f6b7df2380269a43.js"],"default"]
-13:I[6236,[],"OutletBoundary"]
-16:I[6236,[],"ViewportBoundary"]
-18:I[6236,[],"MetadataBoundary"]
-1a:I[2691,[],""]
+f:I[8502,["148","static/chunks/b281fec4-89f52f48b80fea50.js","816","static/chunks/b5f12c68-d3ea9eab273f28fd.js","434","static/chunks/434-28d2f3ac4c229793.js","657","static/chunks/657-bb97722b1c6b46a1.js","687","static/chunks/687-3562cf53a13d284c.js","177","static/chunks/app/layout-f6b7df2380269a43.js"],"default"]
+10:I[6012,[],""]
+11:I[3690,[],""]
+12:I[7064,["148","static/chunks/b281fec4-89f52f48b80fea50.js","816","static/chunks/b5f12c68-d3ea9eab273f28fd.js","434","static/chunks/434-28d2f3ac4c229793.js","657","static/chunks/657-bb97722b1c6b46a1.js","687","static/chunks/687-3562cf53a13d284c.js","177","static/chunks/app/layout-f6b7df2380269a43.js"],"default"]
+14:I[6236,[],"OutletBoundary"]
+17:I[6236,[],"ViewportBoundary"]
+19:I[6236,[],"MetadataBoundary"]
+1b:I[2691,[],""]
 :HL["/_next/static/css/65f94df36a78824a.css","style"]
 :HL["/_next/static/css/141e10bb69e8ba44.css","style"]
-8:T3e06,
+8:T2a00,
+## 시작하게 된 계기
+
+최근 토스 테크 블로그에서 [자료구조를 활용한 복잡한 프론트엔드 컴포넌트 제작하기](https://toss.tech/article/frontend-tree-structure)라는 글을 읽게 되었다. 토스증권 PC의 종목 상세 페이지에서 사용자가 패널을 자유롭게 분할하고 크기를 조절할 수 있는 레이아웃 시스템을 **이진 트리 자료구조**로 구현했다는 내용이었다.
+
+라이브러리 대신 직접 구현을 선택한 이유부터 시작해서, 복잡한 레이아웃 문제를 자료구조적 사고로 해결한 과정이 인상적이었다. 특히 "레이아웃을 데이터로 표현하기" 부분에서 이진 트리로 중첩된 분할 구조를 모델링하는 접근법이 매우 흥미로웠다.
+
+그래서 이 글을 읽고 나서 생각했다. **"나도 한번 만들어보자!"**
+
+## 토스 접근법의 핵심: 이진 트리로 모델링
+
+토스 테크 블로그에서 강조한 핵심은 **패널의 분할을 이진 트리로 모델링**하는 것이었다. 각 분할은 두 개의 자식 영역을 만들고, 이 자식 영역은 다시 분할되거나 실제 패널 내용이 될 수 있다. 이는 완전히 이진 트리 구조다.
+
+```plain
+        분할(세로)
+       /         \
+   패널A      분할(가로)
+             /         \
+        패널B          패널C
+```
+
+이 구조의 장점은 다음과 같다.
+
+- **무한 중첩**: 제한 없이 분할 가능
+- **명확한 구조**: 각 노드의 역할이 명확
+- **효율적인 탐색**: 특정 패널을 찾거나 수정하기 쉬움
+- **재귀적 처리**: 동일한 로직으로 전체 구조 처리
+
+## 구현 목표와 설계
+
+토스 글에서 언급된 요구사항들을 참고해서 다음과 같은 기능을 구현하기로 했다.
+
+1. **패널 분할**: 세로/가로 분할 지원
+2. **패널 삭제**: 트리 구조 유지하면서 안전한 삭제
+3. **크기 조절**: 드래그로 패널 크기 실시간 조절
+4. **컨텍스트 메뉴**: 우클릭으로 패널 조작
+5. **패널 선택**: 현재 활성 패널 표시
+
+## 자료구조 설계: 타입 정의
+
+먼저 이진 트리 구조를 TypeScript로 정의했다. 토스 글에서 언급한 개념들을 참고했다.
+
+```typescript
+import { ReactNode } from 'react';
+
+export interface PanelContent {
+  id: string;
+  title?: string;
+  component: ReactNode;
+}
+
+export interface LayoutNode {
+  id: string;
+  direction: 'horizontal' | 'vertical';
+  left: {
+    ratio: number;
+    node: LayoutNode | PanelContent;
+  };
+  right: {
+    ratio: number;
+    node: LayoutNode | PanelContent;
+  };
+}
+
+export interface LayoutState {
+  root: LayoutNode | PanelContent;
+  selectedPanelId?: string;
+}
+```
+
+`LayoutNode`는 분할을 나타내는 내부 노드이고, `PanelContent`는 실제 패널 내용을 나타내는 리프 노드다. 각 노드는 `left`와 `right` 두 개의 자식을 가진다.
+
+## 상태 관리: React Context + useReducer
+
+Context API와 useReducer를 조합하여 레이아웃의 상태 관리를 구현했다.
+
+```typescript
+function layoutReducer(state: LayoutState, action: LayoutAction): LayoutState {
+  switch (action.type) {
+    case 'SPLIT_PANEL':
+      return {
+        ...state,
+        root: splitPanel(
+          action.panelId,
+          action.direction,
+          action.newPanelComponent || <EmptyPanel />,
+          state.root
+        ),
+      };
+    case 'UPDATE_RATIO':
+      return {
+        ...state,
+        root: updateRatio(action.nodeId, action.leftRatio, action.rightRatio, state.root),
+      };
+    case 'REMOVE_PANEL':
+      return {
+        ...state,
+        root: removePanel(action.panelId, state.root),
+      };
+    default:
+      return state;
+  }
+}
+```
+
+## 핵심 로직 구현
+
+### 패널 분할 로직
+
+패널을 분할할 때는 기존 패널을 새로운 `LayoutNode`로 교체하고, 기존 패널과 새 패널을 각각 자식으로 배치한다.
+
+```typescript
+function splitPanel(
+  panelId: string,
+  direction: 'horizontal' | 'vertical',
+  newPanelComponent: ReactNode,
+  root: LayoutNode | PanelContent,
+): LayoutNode | PanelContent {
+  if (root.id === panelId && isPanelContent(root)) {
+    const newPanel: PanelContent = {
+      id: generateId(),
+      component: newPanelComponent || <EmptyPanel />,
+      title: '빈 패널',
+    };
+
+    return {
+      id: generateId(),
+      direction,
+      left: {
+        ratio: 0.5,
+        node: root,
+      },
+      right: {
+        ratio: 0.5,
+        node: newPanel,
+      },
+    };
+  }
+
+  if (isLayoutNode(root)) {
+    return {
+      ...root,
+      left: {
+        ...root.left,
+        node: splitPanel(panelId, direction, newPanelComponent, root.left.node),
+      },
+      right: {
+        ...root.right,
+        node: splitPanel(panelId, direction, newPanelComponent, root.right.node),
+      },
+    };
+  }
+
+  return root;
+}
+```
+
+### 패널 삭제 로직
+
+삭제는 분할보다 복잡하다. 이진 트리에서 노드를 삭제할 때 트리 구조를 유지해야 하기 때문이다.
+
+핵심은 **형제 노드 승격**이다. 하나의 자식이 삭제되면 남은 형제 노드가 부모의 자리를 차지한다.
+
+```typescript
+function removePanel(panelId: string, root: LayoutNode | PanelContent): LayoutNode | PanelContent {
+  if (root.id === panelId && isPanelContent(root)) {
+    return {
+      id: generateId(),
+      component: <EmptyPanel />,
+      title: '빈 패널',
+    };
+  }
+
+  if (isLayoutNode(root)) {
+    if (root.left.node.id === panelId) {
+      return root.right.node;
+    }
+    if (root.right.node.id === panelId) {
+      return root.left.node;
+    }
+
+    return {
+      ...root,
+      left: {
+        ...root.left,
+        node: removePanel(panelId, root.left.node),
+      },
+      right: {
+        ...root.right,
+        node: removePanel(panelId, root.right.node),
+      },
+    };
+  }
+
+  return root;
+}
+```
+
+### 크기 조절 로직
+
+패널 크기 조절은 각 분할 노드의 비율을 조정하는 것이다.
+
+```typescript
+function updateRatio(
+  nodeId: string,
+  leftRatio: number,
+  rightRatio: number,
+  root: LayoutNode | PanelContent,
+): LayoutNode | PanelContent {
+  if (isLayoutNode(root) && root.id === nodeId) {
+    return {
+      ...root,
+      left: { ...root.left, ratio: leftRatio },
+      right: { ...root.right, ratio: rightRatio },
+    };
+  }
+
+  if (isLayoutNode(root)) {
+    return {
+      ...root,
+      left: {
+        ...root.left,
+        node: updateRatio(nodeId, leftRatio, rightRatio, root.left.node),
+      },
+      right: {
+        ...root.right,
+        node: updateRatio(nodeId, leftRatio, rightRatio, root.right.node),
+      },
+    };
+  }
+
+  return root;
+}
+```
+
+## 렌더링: 재귀적 컴포넌트 구조
+
+이 컴포넌트는 `LayoutNode`와 `PanelContent`를 재귀적으로 렌더링한다.
+
+핵심은 **재귀적 렌더링**이다. 트리 구조를 따라 재귀적으로 컴포넌트를 렌더링한다.
+
+```typescript
+function LayoutPanelContent({ node }: { node: LayoutNode | PanelContent }) {
+  if (isPanelContent(node)) {
+    return (
+      <div className="relative h-full w-full">
+        <div
+          className={`h-full w-full cursor-pointer border-2 transition-colors ${
+            isSelected
+              ? "border-blue-500 bg-blue-50"
+              : "border-gray-200 hover:border-gray-300"
+          }`}
+          onClick={() => handlePanelSelect(node.id)}
+        >
+          {node.component}
+        </div>
+      </div>
+    );
+  }
+
+  if (isLayoutNode(node)) {
+    return (
+      <div className={`flex h-full w-full ${
+        node.direction === "horizontal" ? "flex-row" : "flex-col"
+      }`}>
+        <div style={{ flex: node.left.ratio }}>
+          <LayoutPanelContent node={node.left.node} />
+        </div>
+
+        <div
+          onMouseDown={(e) => handleResize(e, node.id)}
+          className="cursor-col-resize bg-gray-200 hover:bg-blue-400"
+        />
+
+        <div style={{ flex: node.right.ratio }}>
+          <LayoutPanelContent node={node.right.node} />
+        </div>
+      </div>
+    );
+  }
+
+  return null;
+}
+```
+
+## 자료구조적 사고의 중요성
+
+토스 글에서 강조한 대로, 복잡한 UI 문제를 적절한 자료구조로 모델링하면 구현이 훨씬 명확해진다. 패널 분할을 이진 트리로 생각하고 나니 모든 로직이 자연스럽게 따라왔다.
+
+## 재귀적 처리의 효율성
+
+이진 트리 구조 덕분에 모든 연산(분할, 삭제, 크기 조절, 렌더링)을 재귀적으로 처리할 수 있었다. 하나의 패턴으로 모든 복잡성을 해결할 수 있다는 것이 인상적이었다.
+
+## 성능
+
+이러한 구조를 가지고 있어서 불필요한 리렌더링이 발생한다. 예를 들어 2개의 패널이 있을 때, 하나의 패널을 수정하면 전체 레이아웃이 리렌더링된다. 반대편의 패널을 변경되지 않았음에도 분명 일어난다.
+
+특히 패널에 들어가는 컴포넌트가 많아질수록, 복잡할수록 성능 저하가 우려된다. 필요하다면 최적화를 추가해야겠다는 점을 충분히 인지해야할 것 같다고 생각이 들었다.
+
+## 결론
+
+<img alt='conclusion' src='/post/implementing-binary-tree-layout-inspired-by-toss/conclusion.gif' />
+
+토스 테크 블로그의 글을 읽고 직접 구현해본 결과, **자료구조적 사고가 복잡한 프론트엔드 문제를 해결하는 데 얼마나 강력한지** 체감할 수 있었다.
+
+토스에서 강조한 핵심 메시지는 다음과 같다.
+
+> 복잡한 UI 컴포넌트를 개발할 때는 먼저 '이 문제를 어떤 자료구조로 모델링할 수 있을까?'라는 질문부터 시작해보자.
+
+이 조언을 따라 이진 트리로 레이아웃을 모델링하고 나니, 모든 구현이 자연스럽게 따라왔다. 복잡해 보이는 UI 인터랙션도 명확한 자료구조 위에서는 단순한 트리 연산으로 해결될 수 있다는 것을 직접 경험했다.
+
+라이브러리 없이 처음부터 구현하는 것이 처음에는 부담스러워 보였지만, 적절한 자료구조를 선택하고 나니 오히려 더 명확하고 제어 가능한 솔루션을 만들 수 있었다. 토스 팀이 왜 라이브러리 대신 직접 구현을 선택했는지 이제 이해할 수 있다.
+
+앞으로도 복잡한 UI 문제를 마주했을 때는 "어떤 자료구조로 모델링할 수 있을까?"라는 질문부터 시작해보려고 한다. 자료구조와 알고리즘이 프론트엔드 개발에서도 이렇게 중요한 역할을 할 수 있다는 것을 다시 한 번 깨달았다.
+
+---
+
+## 참고자료
+
+- [토스 테크 블로그 - 자료구조를 활용한 복잡한 프론트엔드 컴포넌트 제작하기](https://toss.tech/article/frontend-tree-structure)
+9:T3e06,
 ## React Server Component
 
 RSC(React Server Component)는 서버에서만 실행되는 컴포넌트를 말한다. 즉, 리액트 컴포넌트 내에서 바로 데이터베이스 쿼리를 작성하는 것과 같은 작업을 할 수 있다.
@@ -145,7 +465,7 @@ RSC는 단순히 새로운 렌더링 기술이 아니라, 기존 클라이언트
 
 - [Server Components](https://react.dev/reference/rsc)
 - [One Roundtrip Per Navigation](https://overreacted.io/one-roundtrip-per-navigation/)
-9:T4936,
+a:T48d6,
 ## 들어가며
 
 과거에 [전역 상태를 사용하는 기준이 있으신가요?](https://frontend-fundamentals.com/code-quality/code/detail/?id=5) 라는 글을 보면서, 많은 사람들이 `Context API`의 성능 이슈 등으로 인해 다른 전역 상태 관리 도구를 선호하는 현상에 대해 다시금 고민하게 되었다. 나 역시 비슷한 경험을 했기에, 이 글에서는 `Context API`를 둘러싼 흔한 오해들을 먼저 짚어보고, 나아가 강점인 의존성 주입 패턴과, 상태 관리 시의 성능을 최적화하는 방법까지 함께 살펴보려 한다.
@@ -298,10 +618,7 @@ export default new MockUserService();
 
 ### Only Context API
 
-<video width='50%' controls>
-  <source src='/post/react-context-api/only-context-api.mov' />
-  브라우저가 video 태그를 지원하지 않습니다.
-</video>
+<img alt='only-context-api' src='/post/react-context-api/only-context-api.webp' style={{ width: '50%' }} />
 
 일단 예시에서 사용되는 `Context` 타입을 정의해보자. 아래 타입을 이용해서 작은 실험을 해볼 것이다.
 
@@ -342,10 +659,11 @@ const useContext = () => {
 
 ### Context API with Zustand
 
-<video width='50%' controls>
-  <source src='/post/react-context-api/context-api-with-zustand.mov' />
-  브라우저가 video 태그를 지원하지 않습니다.
-</video>
+<img
+  alt='context-api-with-zustand'
+  src='/post/react-context-api/context-api-with-zustand.webp'
+  style={{ width: '50%' }}
+/>
 
 위 동영상을 보면 `Test3` 컴포넌트는 `color`의 값이 변경되더라도 리렌더링이 발생하지 않는 것을 확인할 수 있다. 이는 `Zustand`를 사용하여 상태를 관리하고 있기 때문이다. `Zustand`를 이용하면서 `Context API`를 사용하여 상태를 관리하는 방법을 알아보자.
 
@@ -409,7 +727,7 @@ function useContext<U>(selector?: (state: ContextType) => U): ContextType | U {
 - **앱 전반의 복잡한 전역 상태 관리**: `Zustand`, `Jotai` 등 상태 관리 라이브러리 단독 사용
 
 다른 글에서도 마지막에 이야기한 것처럼, 결국엔 **'언제, 어떻게'** 쓰는지가 중요하다.
-a:T17df,
+b:T17df,
 ## 싱글톤 패턴
 
 소프트웨어 개발에서 자주 듣게 되는 디자인 패턴 중 하나가 싱글톤 패턴이다.
@@ -594,7 +912,7 @@ const userService = new UserService(logger);
 그래서 싱글톤 패턴을 사용할 때는 주의가 필요하다. DI를 활용하면 싱글톤 패턴의 단점을 보완할 수 있다. 의존성을 외부에서 주입받으면 결합도를 낮추고 테스트와 확장성을 높일 수 있다.
 
 결국 언제, 어떻게 쓰느냐가 중요하다.
-b:T483e,
+c:T483e,
 import { PhotoGrid } from '@/widget/photo-grid';
 
 원래 이 글을 더 빨리 작성하려 했는데, 미루고 미루다 이제야 쓰게 되었다.
@@ -797,7 +1115,7 @@ import { PhotoGrid } from '@/widget/photo-grid';
 이번 네이버 면접 기간에서 첫 번째 날에 면접을 보게 되어서 준비 기간이 길진 못한 점이 조금은 아쉽지만, 아쉬운대로 네이버 기술 역량 인터뷰를 진행했고 현재는 결과를 기다리고 있다.
 
 좋은 결과가 있으면 좋겠다.
-c:T2ad3,
+d:T2ad3,
 팀원들과 함께 개발하던 중, 특이한 현상을 발견했다.
 백엔드에서 ORM으로 `prisma`를 사용하고 있는 상황이였다. `repository` 레이어에서 데이터베이스에 레코드를 생성하기 위해서 아래 같이 코드를 작성했다.
 
@@ -1037,7 +1355,7 @@ f1();
 - [PrismaPromise](https://github.com/prisma/prisma/blob/main/packages/client/src/runtime/core/request/PrismaPromise.ts#L32)
 - [createPrismaPromise](https://github.com/prisma/prisma/blob/38de36b93b6de7088c483b30e7d03407c29d7950/packages/client/src/runtime/core/request/createPrismaPromise.ts#L14)
 - [createLockCountPromise](https://github.com/prisma/prisma/blob/38de36b93b6de7088c483b30e7d03407c29d7950/packages/client/src/runtime/core/transaction/utils/createLockCountPromise.ts#L11_)
-d:T3632,
+e:T3632,
 ## Zustand
 
 > A small, fast, and scalable bearbones state management solution. Zustand has a comfy API based on hooks. It isn't boilerplatey or opinionated, but has enough convention to be explicit and flux-like.
@@ -1385,12 +1703,12 @@ export const create = (<T>(createState: StateCreator<T, [], []> | undefined) =>
 ## 마지막
 
 Zustand는 간단하면서도 유연한 API로 상태를 관리하며, 내부적으로 pub/sub 패턴과 불변 상태 업데이트 로직을 사용해 상태 관리를 제공한다. 또한, 리액트의 `useSyncExternalStore` 훅을 통해서 리액트에서의 렌더링을 제공하고 있다.
-0:{"P":null,"b":"c2cgSNqDtbx89qOreZtsW","p":"","c":["","posts","react-server-component",""],"i":false,"f":[[["",{"children":["posts",{"children":[["postName","react-server-component","d"],{"children":["__PAGE__",{}]}]}]},"$undefined","$undefined",true],["",["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/65f94df36a78824a.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","html",null,{"lang":"ko-kr","className":"h-full w-full","suppressHydrationWarning":true,"children":[["$","head",null,{"children":[["$","meta",null,{"name":"google-site-verification","content":"ktuwDBkR2dZGl0nMI1lDu6kIdrkuAE-u8G8Gp5vwzS0"}],[["$","$L2",null,{"src":"https://www.googletagmanager.com/gtag/js?id=G-ETL2T0X211","strategy":"afterInteractive"}],["$","$L2",null,{"id":"google-analytics","strategy":"afterInteractive","children":"\n          window.dataLayer = window.dataLayer || [];\n          function gtag(){dataLayer.push(arguments);}\n          gtag('js', new Date());\n          gtag('config', 'G-ETL2T0X211');\n        "}]],["$","link",null,{"rel":"stylesheet","href":"https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css"}],["$","link",null,{"rel":"stylesheet","as":"style","crossOrigin":"anonymous","href":"https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"}],["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\n    (function() {\n      try {\n        const theme = localStorage.getItem('theme') || 'light';\n        const isDark = theme === 'dark';\n        \n        document.documentElement.classList.toggle('dark', isDark);\n      } catch (e) {\n        document.documentElement.classList.remove('dark');\n      }\n    })();\n  "}}]]}],["$","$L3",null,{"children":["$","body",null,{"className":"h-full w-full overflow-auto font-sans","children":["$","$L4",null,{"children":[["$","$L5",null,{}],["$","div",null,{"className":"flex min-h-full flex-col gap-4","children":[["$","header",null,{"className":"mt-4 h-fit w-full px-4","children":["$","div",null,{"className":"mx-auto h-full max-w-3xl","children":["$","div",null,{"className":"flex h-full flex-row items-center justify-between","children":[["$","$L6",null,{"href":"/","className":"text-text-primary font-[\"Hack\"] text-xl font-bold","children":"@cjeongmin"}],["$","nav",null,{"className":"mt-1 flex flex-row items-center gap-4","children":[["$","$L6",null,{"href":"/","className":"text-text-secondary hover:text-text-primary","children":"Home"}],["$","$L6",null,{"href":"/about","className":"text-text-secondary hover:text-text-primary","children":"About"}],["$","$L7",null,{"posts":[{"content":"$8","date":"2025. 06. 14","description":"RSC가 해결하려는 문제","fileName":"react-server-component","tags":"$undefined","thumbnail":"$undefined","title":"React Server Component"},{"content":"$9","date":"2025. 06. 06","description":"Context API에 대한 고찰","fileName":"react-context-api","tags":"$undefined","thumbnail":"$undefined","title":"Context API: 의존성 주입부터 상태 관리 최적화까지"},{"content":"$a","date":"2025. 04. 27","description":"싱글톤 패턴과 의존성 주입으로 단점 보완하기","fileName":"singleton-pattern","tags":"$undefined","thumbnail":"$undefined","title":"싱글톤 패턴, 의존성 주입"},{"content":"$b","date":"2025. 04. 17","description":"입학부터 졸업까지","fileName":"university-graduation","tags":"$undefined","thumbnail":"$undefined","title":"졸업, 그리고 여러가지"},{"content":"$c","date":"2025. 02. 10","description":"Prisma의 Promise 알아보기","fileName":"prisma-promise-with-thenable","tags":"$undefined","thumbnail":"$undefined","title":"PrismaPromise (with. Thenable)"},{"content":"$d","date":"2025. 02. 03","description":"Zustand 뜯어보기","fileName":"zustand","tags":"$undefined","thumbnail":"$undefined","title":"Zustand"}]}],["$","$Le",null,{}]]}]]}]}]}],["$","hr",null,{"className":"border-border-primary w-full border-t-[0.5px]"}],["$","main",null,{"className":"flex-1 px-4","children":["$","div",null,{"className":"mx-auto h-full max-w-3xl","children":["$","$Lf",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L10",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]],[]],"forbidden":"$undefined","unauthorized":"$undefined"}]}]}],["$","hr",null,{"className":"border-border-primary w-full border-t-[0.5px]"}],["$","footer",null,{"className":"mb-4 h-8 w-full px-4","children":["$","div",null,{"className":"mx-auto flex h-full max-w-3xl items-center justify-center","children":["$","div",null,{"className":"text-text-muted text-sm","children":"© 2025 cjeongmin"}]}]}],["$","$L11",null,{}]]}]]}]}]}]]}]]}],{"children":["posts",["$","$1","c",{"children":[null,["$","$Lf",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L10",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":[["postName","react-server-component","d"],["$","$1","c",{"children":[null,["$","$Lf",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L10",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":["__PAGE__",["$","$1","c",{"children":["$L12","$undefined",[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/141e10bb69e8ba44.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","$L13",null,{"children":["$L14","$L15",null]}]]}],{},null,false]},null,false]},null,false]},null,false],["$","$1","h",{"children":[null,["$","$1","evIv_uILcVe3FzByUkdHb",{"children":[["$","$L16",null,{"children":"$L17"}],null]}],["$","$L18",null,{"children":"$L19"}]]}],false]],"m":"$undefined","G":["$1a","$undefined"],"s":false,"S":true}
-1b:I[2208,["148","static/chunks/b281fec4-89f52f48b80fea50.js","434","static/chunks/434-28d2f3ac4c229793.js","384","static/chunks/app/posts/%5BpostName%5D/page-53f1f9f340cc97b7.js"],"default"]
-1c:I[1189,["148","static/chunks/b281fec4-89f52f48b80fea50.js","434","static/chunks/434-28d2f3ac4c229793.js","384","static/chunks/app/posts/%5BpostName%5D/page-53f1f9f340cc97b7.js"],"default"]
-1d:I[5128,["148","static/chunks/b281fec4-89f52f48b80fea50.js","434","static/chunks/434-28d2f3ac4c229793.js","384","static/chunks/app/posts/%5BpostName%5D/page-53f1f9f340cc97b7.js"],"default"]
-1e:I[2839,["148","static/chunks/b281fec4-89f52f48b80fea50.js","434","static/chunks/434-28d2f3ac4c229793.js","384","static/chunks/app/posts/%5BpostName%5D/page-53f1f9f340cc97b7.js"],"default"]
-1f:T3e06,
+0:{"P":null,"b":"y_WxbJxRgIjrZ9FsfVfWJ","p":"","c":["","posts","react-server-component",""],"i":false,"f":[[["",{"children":["posts",{"children":[["postName","react-server-component","d"],{"children":["__PAGE__",{}]}]}]},"$undefined","$undefined",true],["",["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/65f94df36a78824a.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","html",null,{"lang":"ko-kr","className":"h-full w-full","suppressHydrationWarning":true,"children":[["$","head",null,{"children":[["$","meta",null,{"name":"google-site-verification","content":"ktuwDBkR2dZGl0nMI1lDu6kIdrkuAE-u8G8Gp5vwzS0"}],[["$","$L2",null,{"src":"https://www.googletagmanager.com/gtag/js?id=G-ETL2T0X211","strategy":"afterInteractive"}],["$","$L2",null,{"id":"google-analytics","strategy":"afterInteractive","children":"\n          window.dataLayer = window.dataLayer || [];\n          function gtag(){dataLayer.push(arguments);}\n          gtag('js', new Date());\n          gtag('config', 'G-ETL2T0X211');\n        "}]],["$","link",null,{"rel":"stylesheet","href":"https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css"}],["$","link",null,{"rel":"stylesheet","as":"style","crossOrigin":"anonymous","href":"https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"}],["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\n    (function() {\n      try {\n        const theme = localStorage.getItem('theme') || 'light';\n        const isDark = theme === 'dark';\n        \n        document.documentElement.classList.toggle('dark', isDark);\n      } catch (e) {\n        document.documentElement.classList.remove('dark');\n      }\n    })();\n  "}}]]}],["$","$L3",null,{"children":["$","body",null,{"className":"h-full w-full overflow-auto font-sans","children":["$","$L4",null,{"children":[["$","$L5",null,{}],["$","div",null,{"className":"flex min-h-full flex-col gap-4","children":[["$","header",null,{"className":"mt-4 h-fit w-full px-4","children":["$","div",null,{"className":"mx-auto h-full max-w-3xl","children":["$","div",null,{"className":"flex h-full flex-row items-center justify-between","children":[["$","$L6",null,{"href":"/","className":"text-text-primary font-[\"Hack\"] text-xl font-bold","children":"@cjeongmin"}],["$","nav",null,{"className":"mt-1 flex flex-row items-center gap-4","children":[["$","$L6",null,{"href":"/","className":"text-text-secondary hover:text-text-primary","children":"Home"}],["$","$L6",null,{"href":"/about","className":"text-text-secondary hover:text-text-primary","children":"About"}],["$","$L7",null,{"posts":[{"content":"$8","date":"2025. 07. 12","description":"토스 테크 블로그 내용 무작정 따라하기","fileName":"implementing-binary-tree-layout-inspired-by-toss","tags":"$undefined","thumbnail":"$undefined","title":"이진 트리 기반 레이아웃 시스템 구현해보기"},{"content":"$9","date":"2025. 06. 14","description":"RSC가 해결하려는 문제","fileName":"react-server-component","tags":"$undefined","thumbnail":"$undefined","title":"React Server Component"},{"content":"$a","date":"2025. 06. 06","description":"Context API에 대한 고찰","fileName":"react-context-api","tags":"$undefined","thumbnail":"$undefined","title":"Context API: 의존성 주입부터 상태 관리 최적화까지"},{"content":"$b","date":"2025. 04. 27","description":"싱글톤 패턴과 의존성 주입으로 단점 보완하기","fileName":"singleton-pattern","tags":"$undefined","thumbnail":"$undefined","title":"싱글톤 패턴, 의존성 주입"},{"content":"$c","date":"2025. 04. 17","description":"입학부터 졸업까지","fileName":"university-graduation","tags":"$undefined","thumbnail":"$undefined","title":"졸업, 그리고 여러가지"},{"content":"$d","date":"2025. 02. 10","description":"Prisma의 Promise 알아보기","fileName":"prisma-promise-with-thenable","tags":"$undefined","thumbnail":"$undefined","title":"PrismaPromise (with. Thenable)"},{"content":"$e","date":"2025. 02. 03","description":"Zustand 뜯어보기","fileName":"zustand","tags":"$undefined","thumbnail":"$undefined","title":"Zustand"}]}],["$","$Lf",null,{}]]}]]}]}]}],["$","hr",null,{"className":"border-border-primary w-full border-t-[0.5px]"}],["$","main",null,{"className":"flex-1 px-4","children":["$","div",null,{"className":"mx-auto h-full max-w-3xl","children":["$","$L10",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L11",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]],[]],"forbidden":"$undefined","unauthorized":"$undefined"}]}]}],["$","hr",null,{"className":"border-border-primary w-full border-t-[0.5px]"}],["$","footer",null,{"className":"mb-4 h-8 w-full px-4","children":["$","div",null,{"className":"mx-auto flex h-full max-w-3xl items-center justify-center","children":["$","div",null,{"className":"text-text-muted text-sm","children":"© 2025 cjeongmin"}]}]}],["$","$L12",null,{}]]}]]}]}]}]]}]]}],{"children":["posts",["$","$1","c",{"children":[null,["$","$L10",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L11",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":[["postName","react-server-component","d"],["$","$1","c",{"children":[null,["$","$L10",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L11",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":["__PAGE__",["$","$1","c",{"children":["$L13","$undefined",[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/141e10bb69e8ba44.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","$L14",null,{"children":["$L15","$L16",null]}]]}],{},null,false]},null,false]},null,false]},null,false],["$","$1","h",{"children":[null,["$","$1","It6NWG32CPVhFNxhbDIQZ",{"children":[["$","$L17",null,{"children":"$L18"}],null]}],["$","$L19",null,{"children":"$L1a"}]]}],false]],"m":"$undefined","G":["$1b","$undefined"],"s":false,"S":true}
+1c:I[2208,["148","static/chunks/b281fec4-89f52f48b80fea50.js","434","static/chunks/434-28d2f3ac4c229793.js","384","static/chunks/app/posts/%5BpostName%5D/page-53f1f9f340cc97b7.js"],"default"]
+1d:I[1189,["148","static/chunks/b281fec4-89f52f48b80fea50.js","434","static/chunks/434-28d2f3ac4c229793.js","384","static/chunks/app/posts/%5BpostName%5D/page-53f1f9f340cc97b7.js"],"default"]
+1e:I[5128,["148","static/chunks/b281fec4-89f52f48b80fea50.js","434","static/chunks/434-28d2f3ac4c229793.js","384","static/chunks/app/posts/%5BpostName%5D/page-53f1f9f340cc97b7.js"],"default"]
+1f:I[2839,["148","static/chunks/b281fec4-89f52f48b80fea50.js","434","static/chunks/434-28d2f3ac4c229793.js","384","static/chunks/app/posts/%5BpostName%5D/page-53f1f9f340cc97b7.js"],"default"]
+20:T3e06,
 ## React Server Component
 
 RSC(React Server Component)는 서버에서만 실행되는 컴포넌트를 말한다. 즉, 리액트 컴포넌트 내에서 바로 데이터베이스 쿼리를 작성하는 것과 같은 작업을 할 수 있다.
@@ -1520,8 +1838,8 @@ RSC는 단순히 새로운 렌더링 기술이 아니라, 기존 클라이언트
 
 - [Server Components](https://react.dev/reference/rsc)
 - [One Roundtrip Per Navigation](https://overreacted.io/one-roundtrip-per-navigation/)
-12:["$","$L1b",null,{"children":["$","section",null,{"className":"flex w-full flex-row","children":[["$","div",null,{"className":"w-full xl:min-w-[768px]","children":[["$","header",null,{"className":"text-text-primary flex flex-col gap-2","children":[["$","h1",null,{"className":"text-3xl font-bold","children":"React Server Component"}],["$","p",null,{"className":"text-text-muted text-sm","children":"2025. 06. 14"}]]}],["$","hr",null,{"className":"border-border-primary my-8 w-full border-t-[0.5px]"}],["$","$L1c",null,{"children":[["$","h2",null,{"children":"React Server Component"}],"\n",["$","p",null,{"children":"RSC(React Server Component)는 서버에서만 실행되는 컴포넌트를 말한다. 즉, 리액트 컴포넌트 내에서 바로 데이터베이스 쿼리를 작성하는 것과 같은 작업을 할 수 있다."}],"\n",["$","p",null,{"children":"RSC는 다시 렌더링되지 않는다. 따라서 사이드 이펙트를 고려하지 않아도 된다."}],"\n",["$","p",null,{"children":"결론적으로 말하면, RSC는 리액트에서 데이터를 효율적으로 가져오기 위해 고안된 메커니즘이다. RSC의 등장을 이해하기 위해서 현대 웹 애플리케이션의 기존 렌더링 패러다임을 알아보자."}],"\n",["$","h2",null,{"children":"CSR"}],"\n",["$","p",null,{"children":"CSR(Client Side Rendering)은 웹 개발 패러다임에 큰 변화를 가져온 모델이다. 특히 SPA(Single Page Application)의 근간을 이룬다. 이 방식에서 브라우저는 서버로부터 최소한의 HTML과 대규모의 자바스크립트 번들을 전달받는다."}],"\n",["$","p",null,{"children":"이후 모든 렌더링, 데이터 페칭, 라우팅 및 비즈니스 로직 실행이 전적으로 클라이언트에서 이루어진다."}],"\n",["$","p",null,{"children":["CSR의 가장 큰 장점은 초기 로딩이 완료된 후의 사용자 경험이다. 페이지 전체를 새로고침하지 않고도 동적으로 UI를 업데이트할 수 있어 매우 유동적이고 ",["$","strong",null,{"children":"앱과 같은"}]," 상호작용을 제공한다. 이 때문에 상호작용이 많은 애플리케이션에 이상적이다."]}],"\n",["$","p",null,{"children":"하지만 CSR은 명백한 단점을 가지고 있는데, 초기 로딩 시 사용자는 자바스크립트 번들이 다운로드되고 파싱되어 실행될 때까지 빈 화면이나 로딩 스피너를 보게 된다. 이는 사용자가 의미 있는 콘텐츠를 처음 보게 되는 시간(First Contentful Paint, FCP)과 LCP(Largest Contentful Paint)를 지연시켜 초기 사용자 경험을 저해한다. 또한, 검색 엔진 크롤러가 초기의 빈 HTML을 보게 되므로 SEO에 불리하다."}],"\n",["$","h2",null,{"children":"SSR"}],"\n",["$","p",null,{"children":"SSR(Server Side Rendering)은 초기 렌더링을 서버에서 수행하는 방식이다. 이 방식에서 브라우저는 서버로부터 완전한 HTML을 전달받는다. 그 결과 FCP가 매우 빠르며 SEO에도 유리하다."}],"\n",["$","p",null,{"children":["그러나 SSR에도 고유한 문제가 존재한다. 바로 ",["$","strong",null,{"children":"Hydration"}]," 과정이다. 서버에서 생성된 정적 HTML은 상호작용이 불가능하다. 이를 상호작용 가능하게 만들기 위해, 클라이언트는 SSR에 사용된 것과 동일한 자바스크립트 번들을 다운로드하고, 다시 한번 렌더링 로직을 실행하여 가상 DOM을 생성한 뒤, 이를 기존의 정적 HTML에 연결하고 이벤트 리스너를 부착해야 한다. 이 과정은 페이지가 시각적으로는 준비된 것처럼 보이지만 실제로는 상호작용이 불가능하게 만들 수 있다. 이는 FID(First Input Delay), INP(Interaction to Next Paint)와 같은 지표를 좋지 않게 만들 수 있다."]}],"\n",["$","p",null,{"children":"즉, 서버와 클라이언트에서 동일한 렌더링 작업을 두 번 수행하는 비효율이 발생한다. 또한, 사용자의 모든 상호작용에 따른 업데이트를 서버와의 왕복(Round Trip)을 필요로 하므로, 매우 동적인 애플리케이션에는 적합하지 않을 수 있다."}],"\n",["$","h2",null,{"children":"네트워크라는 병목"}],"\n",["$","p",null,{"children":"RSC는 단순히 성능을 조금 개선하려는 시도가 아니었다. 이는 클라이언트 중심 아키텍처가 본질적으로 안고 있는 몇 가지 근본적인 문제를 해결하기 위한 구조적 변화이다."}],"\n",["$","h3",null,{"children":"클라이언트-서버 데이터 워터폴"}],"\n",["$","p",null,{"children":"전통적인 클라이언트 중심 애플리케이션에서 데이터 페칭은 종종 \"워터폴\" 현상을 유발한다. 예를 들어, 사용자 프로필을 보여주는 페이지를 생각해보자. 상위 컴포넌트가 먼저 사용자 정보를 가져오기 위해 API를 호출한다. 이 요청이 완료되어 응답을 받은 후에야, 하위 컴포넌트들이 해당 사용자 ID를 사용하여 친구 목록이나 게시물 목록을 가져오는 추가 API를 호출할 수 있다. 이러한 순차적이고 의존적인 네트워크 요청들은 각각 서버와의 RTT를 필요로 하며, 특히 사용자의 물리적 위치가 서버와 멀수록 지연 시간을 더욱 길어지게 된다. 결과적으로 전체 UI가 사용자에게 보여지기까지 상당한 시간이 소요된다."}],"\n",["$","h3",null,{"children":"번들 크기"}],"\n",["$","p",null,{"children":"리액트 생태계는 풍부한 서드파티 라이브러리를 통해 발전해왔다. 마크다운 파싱을 위한 라이브러리나 HTML을 안전하게 처리하기 위한 라이브러리들은 매우 유용하지만 클라이언트 자바스크립트 번들 크기를 키우기도 한다."}],"\n",["$","p",null,{"children":"전통적인 SSR 모델에서도 이 문제는 해결되지 않는다. 상호작용이 없는 정적 콘텐츠를 렌더링하는 데 사용된 라이브러리 코드까지도, Hydration을 위해 클라이언트로 전송되어야 하기 때문이다. 이로 인해 사용자는 더 큰 자바스크립트 파일을 다운로드하고 파싱해야 하며 이는 FID를 지연시키는 직접적인 원인이 된다."}],"\n",["$","h3",null,{"children":"Hydration 오버헤드"}],"\n",["$","p",null,{"children":"SSR은 초기 렌더링 속도를 개선했지만, 근본적으로 클라이언트가 서버가 했던 작업을 다시 반복해야 하는 \"이중 작업\" 문제를 안고 있다. 이는 명백한 성능 비용이다."}],"\n",["$","p",null,{"children":"이러한 문제들은 개별적인 이슈처럼 보이지만, 사실은 하나의 근본 원인에서 파생된 문제들이다. 그 원인은 바로 전통적인 리액트 애플리케이션의 \"클라이언트 중심\" 아키텍처에 있다. 애플리케이션의 두뇌, 즉 리액트 런타임과 컴포넌트 로직이 전적으로 클라이언트에 존재하기 때문에, 클라이언트는 무언가를 하기 위해 항상 네트워크를 통해 모든 코드와 데이터를 가져와야만 했다. 리액트 팀은 서버가 단순히 정적 파일을 제공하거나 API 엔드포인트 역할만 하는 수동적인 존재로 저활용되고 있음을 인지했고, RSC는 이러한 클라이언트 중심의 가정을 근본적으로 뒤집는 철학적 전환을 의미한다. 이는 연산을 데이터가 있는 곳으로 이동시켜, 서버를 리액트 렌더링 과정의 일등 시민으로 격상시키려는 시도이다. 쉽게 말해, 이제 데이터를 가져오고 처리하는 일을 서버에서 직접 하도록 해서, 서버가 리액트 앱을 만드는 데 더 중요한 역할을 하게 된 것이다."}],"\n",["$","h2",null,{"children":"새로운 모델"}],"\n",["$","p",null,{"children":"RSC는 앞서 언급된 문제들을 해결하기 위해 새로운 아키텍처 모델을 제시한다."}],"\n",["$","p",null,{"children":"이 모델의 핵심은 개발자가 각 컴포넌트의 특성에 따라 최적의 렌더링 위치를 서버 또는 클라이언트로 직접 선택할 수 있다는 점이다. 예를 들어, 데이터베이스에서 게시물 목록을 가져와 표시하는 부분은 서버 컴포넌트로 만들어 번들 크기 증가 없이 서버에서 직접 렌더링하고, 각 게시물에 있는 좋아요 버튼과 같이 상호작용이 필요한 부분만 클라이언트 컴포넌트로 만드는 식이다."}],"\n",["$","p",null,{"children":"RSC의 목표는 클라이언트를 완전히 배제하는 것이 아니라, 서버 코드와 클라이언트 코드를 매끄럽게 조합하여 개발자가 네트워크의 존재를 거의 느끼지 못하게 만드는 것이다. 즉, 서버와 클라이언트 사이의 간극을 메우는 것을 지향한다."}],"\n",["$","p",null,{"children":"여기서 중요한 점은 RSC가 단순히 새로운 렌더링 기법이 아니라, 완전히 새로운 컴포넌트 타입을 도입했다는 것이다. SSR이 기존 컴포넌트에 적용되는 기술인 반면, RSC는 리액트의 컴포넌트 모델 자체를 '서버 컴포넌트'와 '클라이언트 컴포넌트'로 근본적으로 분리한다. 이 분리는 개발자에게 더 신중한 아키텍처 설계를 요구한다. 더 이상 모든 컴포넌트가 동일한 환경에서 동작한다고 가정할 수 없다. 각 컴포넌트의 목적(데이터 표시 vs 사용자 상호작용)을 명확히 파악하여 타입을 결정해야 하며, 이는 자연스럽게 서버 로직과 클라이언트 로직의 관심사 분리로 이어진다."}],"\n",["$","h2",null,{"children":"\"use client\""}],"\n",["$","p",null,{"children":"RSC 패러다임에서 리액트 컴포넌트는 두 가지 유형으로 나뉜다. 서버 컴포넌트는 RSC 패러다임에서 기본 단위이다. 별도의 명시가 없는 한 모든 컴포넌트가 기본적으로 서버 컴포넌트로 간주된다."}],"\n",["$","p",null,{"children":[["$","code",null,{"children":"\"use client'"}]," 지시어를 추가하면 해당 모듈의 모든 컴포넌트는 클라이언트 컴포넌트로 간주된다. 즉 코드가 자바스크립트 번들에 포함되어 클라이언트로 전송되며 서버에서 초기 HTML 렌더링을 거친 후, 클라이언트에서 Hydration을 거친다."]}],"\n",["$","p",null,{"children":["이 글에서는 자세하게 다루지는 않지만 클라이언트 컴포넌트 파일 내에서 서버 컴포넌트를 직접 사용할 수 없다. 이는 서버 컴포넌트의 코드가 클라이언트 번들에 포함될 수 없기 때문이다. 하지만, 부모 컴포넌트로부터 ",["$","code",null,{"children":"props"}],"를 통해 이미 렌더링된 서버 컴포넌트를 전달받아 렌더링하는 것은 가능하다."]}],"\n",["$","p",null,{"children":[["$","code",null,{"children":"\"use client\""}]," 지시어는 단순히 특정 컴포넌트를 클라이언트용으로 표시하는 것 이상의 의미를 갖는다. 이는 서버와 클라이언트 모듈 그래프 사이에 명확한 ",["$","strong",null,{"children":"네트워크 경계"}],"를 설정하는 역할을 한다."]}],"\n",["$","p",null,{"children":[["$","code",null,{"children":"\"use client\""}],"가 선언된 모듈은 클라이언트 경계의 시작점이 된다. 중요한 점은, 이 경계가 전이적인 특성을 가진다는 점이다. 즉, ",["$","code",null,{"children":"\"use client\""}]," 모듈이 임포트하는 다른 모듈(하위 컴포넌트 포함)은 별도의 지시어가 없더라도 자동으로 클라이언트 번들의 일부가 된다."]}],"\n",["$","p",null,{"children":["이러한 동작 방식은 마치 색칠을 하는 것처럼, 컴포넌트 의존성 트리의 특정 지점에 ",["$","code",null,{"children":"\"use client\""}],"를 도입하면, 그 영향력이 트리를 따라 아래로 전파되어 모든 자손 모듈을 클라이언트 컴포넌트로 변환시킨다. 만약 이 특성을 고려하지 않고 트리의 상위 레벨에 있는 컴포넌트에 ",["$","code",null,{"children":"\"use client\""}],"를 적용하면 그 아래의 수많은 서버 컴포넌트의 후보들이 의도치 않게 클라이언트 컴포넌트로 전환되어 RSC의 핵심 이점인 번들 크기 감소 효과가 무력화될 수 있다."]}],"\n",["$","p",null,{"children":"이 때문에 RSC 아키텍처에서는 컴포넌트 구조 설계가 매우 중요해지게 된다. 개별 컴포넌트뿐만 아니라 전체 의존성 그래프를 고려해야 한다. 상호작용이 필요한 클라이언트 컴포넌트는 가능한 한 컴포넌트 트리의 가장 아래쪽, 리프에 위치시켜 클라이언트 측 모듈 그래프의 크기를 최소화해야 한다."}],"\n",["$","p",null,{"children":["$","strong",null,{"children":[["$","code",null,{"children":"\"use client\""}],"는 렌더 트리가 아닌 모듈 의존성 트리에서 서버와 클라이언트 코드 간의 경계를 정의한다는 점을 기억해야한다."]}]}],"\n",["$","h2",null,{"children":"데이터 페칭의 재해석"}],"\n",["$","p",null,{"children":"서버 컴포넌트는 데이터 페칭 방식을 근본적으로 변화시킨다."}],"\n",["$","p",null,{"children":"페이지 이동 시 서버와의 적은 통신으로 데이터를 가져오는 것이 가장 이상적이다. 전통적인 HTML 기반 웹사이트는 가능했지만, 웹 기술이 발전하면서 많은 로직이 서버에서 클라이언트로 넘어갔다. 각 컴포넌트가 화면에 그려지기 위해서 필요한 데이터를 개별적으로 서버에 요청하기 시작했고, 이러한 방식은 클라이언트-서버 워터폴 현상을 유발했다. 하나의 요청이 끝나야 다음 요청을 보낼 수 있게 되어, 여러 번의 순차적인 왕복이 발생하고 결국 페이지 로딩 시간이 길어지는 비효율이 발생한 것이다."}],"\n",["$","p",null,{"children":"이러한 비효율을 해결하기 위해 여러 가지 방법들이 시도되었다."}],"\n",["$","p",null,{"children":"하위 컴포넌트에서 개별적으로 데이터를 요청하는 대신, 페이지의 최상위 컴포넌트에서 모든 데이터를 한 번에 요청하는 방식이 있었다. 하지만 이 방법은 하위 컴포넌트가 어떤 데이터를 필요로 하는지 상위 컴포넌트가 모두 알아야 하므로 유지보수가 어려워지는 단점이 있다."}],"\n",["$","p",null,{"children":"필요한 모든 데이터를 하나의 구조화된 쿼리로 묶어 서버에 요청하는 방식이다. 이는 여러 API를 호출할 필요 없이 단 한 번의 요청으로 모든 데이터를 가져올 수 있게 해주어 매우 효율적이지만, 별도의 GraphQL 서버를 구축해야 하는 부담이 있다."}],"\n",["$","p",null,{"children":"라우터 단에서 데이터 로딩을 처리하는 방식이다. Remix, Next.js에서 로더 함수를 통해서 페이지가 렌더링되기 전에 라우터가 해당 페이지에 필요한 모든 데이터를 로더를 통해 미리 가져온다. 클라이언트 또는 서버 양쪽에서 실행될 수 있다. 그렇지만 서버 로더의 장점이 더 많은데, 서버는 데이터베이스와 더 가까이 있기 때문에 데이터 요청-응답 속도가 빠르고 클라이언트의 느린 네트워크 환경에 영향을 받지 않는다. 또한 데이터베이스 접근 권한이나 API 키 같은 민감한 정보를 클라이언트에 노출하지 않을 수 있고 여러 데이터 요청을 서버 단에서 병렬로 처리한 후, 합쳐진 결과를 클라이언트에 한 번에 보내주므로 클라이언트-서버 워터폴 문제를 근본적으로 해결한다."}],"\n",["$","p",null,{"children":["서버 컴포넌트는 서버 로더를 컴포넌트 단위로 분해하여 조합할 수 있게 만든 것이다. 각 컴포넌트는 자신이 필요한 데이터를 서버에서 직접 가져오는 로직을 가질 수 있다. 이는 데이터를 사용하는 컴포넌트와 데이터 페칭 로직을 같은 위치에 둘 수 있게 하여 코드의 가독성과 유지보수성을 높인다. 더 이상 ",["$","code",null,{"children":"useEffect"}],"와 로딩 상태, 에러 상태를 수동으로 관리하는 복잡한 패턴이 필요 없어진다."]}],"\n",["$","p",null,{"children":"이 모든 과정이 서버에서 일어나기 때문에, 클라이언트-서버 간의 데이터 워터폴 현상을 원천적으로 방지하고, 데이터베이스나 파일 시스템과 같은 데이터 계층에 낮은 지연 시간으로 직접 접근할 수 있다."}],"\n",["$","pre",null,{"children":["$","code",null,{"className":"hljs language-tsx","children":[["$","span",null,{"className":"code-line numbered-code-line highlighted-code-line","data-line-number":"1","children":[["$","span",null,{"className":"hljs-keyword","children":"import"}]," db ",["$","span",null,{"className":"hljs-keyword","children":"from"}]," ",["$","span",null,{"className":"hljs-string","children":"'@/lib/db'"}],";"]}],"\n",["$","span",null,{"className":"code-line numbered-code-line","data-line-number":"2","children":[["$","span",null,{"className":"hljs-keyword","children":"import"}]," ",["$","span",null,{"className":"hljs-title class_","children":"AuthorDetails"}]," ",["$","span",null,{"className":"hljs-keyword","children":"from"}]," ",["$","span",null,{"className":"hljs-string","children":"'@/components/AuthorDetails'"}],";"]}],"\n",["$","span",null,{"className":"code-line numbered-code-line","data-line-number":"3"}],"\n",["$","span",null,{"className":"code-line numbered-code-line","data-line-number":"4","children":[["$","span",null,{"className":"hljs-keyword","children":"async"}]," ",["$","span",null,{"className":"hljs-keyword","children":"function"}]," ",["$","span",null,{"className":"hljs-title function_","children":"NotePage"}],"(","{ params }: { params: { id: ",["$","span",null,{"className":"hljs-params hljs-built_in","children":"string"}]," } }",") {"]}],"\n",["$","span",null,{"className":"code-line numbered-code-line highlighted-code-line","data-line-number":"5","children":["  ",["$","span",null,{"className":"hljs-keyword","children":"const"}]," note = ",["$","span",null,{"className":"hljs-keyword","children":"await"}]," db.",["$","span",null,{"className":"hljs-property","children":"notes"}],".",["$","span",null,{"className":"hljs-title function_","children":"findUnique"}],"({ ",["$","span",null,{"className":"hljs-attr","children":"where"}],": { ",["$","span",null,{"className":"hljs-attr","children":"id"}],": params.",["$","span",null,{"className":"hljs-property","children":"id"}]," } });"]}],"\n",["$","span",null,{"className":"code-line numbered-code-line","data-line-number":"6"}],"\n",["$","span",null,{"className":"code-line numbered-code-line","data-line-number":"7","children":["  ",["$","span",null,{"className":"hljs-keyword","children":"if"}]," (!note) {"]}],"\n",["$","span",null,{"className":"code-line numbered-code-line","data-line-number":"8","children":["    ",["$","span",null,{"className":"hljs-keyword","children":"return"}]," ","<",["$","span",null,{"className":"xml hljs-tag hljs-name","children":"div"}],">","Note not found.","</",["$","span",null,{"className":"xml hljs-tag hljs-name","children":"div"}],">",";"]}],"\n",["$","span",null,{"className":"code-line numbered-code-line","data-line-number":"9","children":"  }"}],"\n",["$","span",null,{"className":"code-line numbered-code-line","data-line-number":"10"}],"\n",["$","span",null,{"className":"code-line numbered-code-line","data-line-number":"11","children":["  ",["$","span",null,{"className":"hljs-keyword","children":"return"}]," ("]}],"\n",["$","span",null,{"className":"code-line numbered-code-line","data-line-number":"12","children":["    ","<",["$","span",null,{"className":"xml hljs-tag hljs-name","children":"article"}],">"]}],"\n",["$","span",null,{"className":"code-line numbered-code-line","data-line-number":"13","children":["      ","<",["$","span",null,{"className":"xml hljs-tag hljs-name","children":"h1"}],">","{note.title}","</",["$","span",null,{"className":"xml hljs-tag hljs-name","children":"h1"}],">"]}],"\n",["$","span",null,{"className":"code-line numbered-code-line","data-line-number":"14","children":["      ","<",["$","span",null,{"className":"xml hljs-tag hljs-name","children":"AuthorDetails"}]," ",["$","span",null,{"className":"xml hljs-tag hljs-attr","children":"authorId"}],"=",["$","span",null,{"className":"xml hljs-tag hljs-string","children":"{note.authorId}"}]," />"]}],"\n",["$","span",null,{"className":"code-line numbered-code-line","data-line-number":"15","children":["      ","<",["$","span",null,{"className":"xml hljs-tag hljs-name","children":"section"}],">","{note.content}","</",["$","span",null,{"className":"xml hljs-tag hljs-name","children":"section"}],">"]}],"\n",["$","span",null,{"className":"code-line numbered-code-line","data-line-number":"16","children":["    ","</",["$","span",null,{"className":"xml hljs-tag hljs-name","children":"article"}],">"]}],"\n",["$","span",null,{"className":"code-line numbered-code-line","data-line-number":"17","children":"  );"}],"\n",["$","span",null,{"className":"code-line numbered-code-line","data-line-number":"18","children":"}"}],"\n",["$","span",null,{"className":"code-line numbered-code-line","data-line-number":"19"}],"\n",["$","span",null,{"className":"code-line numbered-code-line","data-line-number":"20","children":[["$","span",null,{"className":"hljs-keyword","children":"export"}]," ",["$","span",null,{"className":"hljs-keyword","children":"default"}]," ",["$","span",null,{"className":"hljs-title class_","children":"NotePage"}],";"]}],"\n"]}]}],"\n",["$","p",null,{"children":"웹 성능 최적화에서 핵심은 클라이언트와 서버의 통신을 통해서 생기는 네트워크 왕복 횟수를 줄이는 것이다. 이를 위해 데이터 로딩의 책임을 클라이언트에서 서버로 옮기는 것이 중요하다. 전통적인 HTML 방식의 단순함과 효율성을 현대적인 컴포넌트 기반 아키텍처에 접목하려는 시도를 통해서 서버 컴포넌트가 탄생한 것이다."}],"\n",["$","p",null,{"children":"결론적으로 UI 로직과 데이터 요구사항을 한곳에 모으고 데이터 로딩의 효율성을 높이고자 한 것이다."}],"\n",["$","h2",null,{"children":"마지막으로"}],"\n",["$","p",null,{"children":"RSC는 단순히 새로운 렌더링 기술이 아니라, 기존 클라이언트 중심 아키텍처가 가진 데이터 워터폴과 번들 크기 문제를 근본적으로 해결하려는 패러다임의 전환이다."}],"\n",["$","p",null,{"children":"웹 애플리케이션의 성능과 사용자 경험을 끌어올리려고 하는 노력이며, 서버-클라이언트 이중성을 이해하고 각 컴포넌트의 책임과 경계를 설계하는 능력이 더욱 더 중요해질 것 같다."}],"\n",["$","h2",null,{"children":"참고자료"}],"\n",["$","ul",null,{"children":["\n",["$","li",null,{"children":["$","a",null,{"href":"https://react.dev/reference/rsc","children":"Server Components"}]}],"\n",["$","li",null,{"children":["$","a",null,{"href":"https://overreacted.io/one-roundtrip-per-navigation/","children":"One Roundtrip Per Navigation"}]}],"\n"]}]]}],["$","hr",null,{"className":"border-border-primary my-8 w-full border-t-[0.5px]"}],["$","$L1d",null,{}]]}],["$","aside",null,{"className":"hidden xl:block","children":["$","$L1e",null,{"className":"sticky top-4 ml-8 max-h-[calc(100vh-2rem)] w-48 overflow-auto","content":"$1f"}]}]]}]}]
-17:[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]
-14:null
+13:["$","$L1c",null,{"children":["$","section",null,{"className":"flex w-full flex-row","children":[["$","div",null,{"className":"w-full xl:min-w-[768px]","children":[["$","header",null,{"className":"text-text-primary flex flex-col gap-2","children":[["$","h1",null,{"className":"text-3xl font-bold","children":"React Server Component"}],["$","p",null,{"className":"text-text-muted text-sm","children":"2025. 06. 14"}]]}],["$","hr",null,{"className":"border-border-primary my-8 w-full border-t-[0.5px]"}],["$","$L1d",null,{"children":[["$","h2",null,{"children":"React Server Component"}],"\n",["$","p",null,{"children":"RSC(React Server Component)는 서버에서만 실행되는 컴포넌트를 말한다. 즉, 리액트 컴포넌트 내에서 바로 데이터베이스 쿼리를 작성하는 것과 같은 작업을 할 수 있다."}],"\n",["$","p",null,{"children":"RSC는 다시 렌더링되지 않는다. 따라서 사이드 이펙트를 고려하지 않아도 된다."}],"\n",["$","p",null,{"children":"결론적으로 말하면, RSC는 리액트에서 데이터를 효율적으로 가져오기 위해 고안된 메커니즘이다. RSC의 등장을 이해하기 위해서 현대 웹 애플리케이션의 기존 렌더링 패러다임을 알아보자."}],"\n",["$","h2",null,{"children":"CSR"}],"\n",["$","p",null,{"children":"CSR(Client Side Rendering)은 웹 개발 패러다임에 큰 변화를 가져온 모델이다. 특히 SPA(Single Page Application)의 근간을 이룬다. 이 방식에서 브라우저는 서버로부터 최소한의 HTML과 대규모의 자바스크립트 번들을 전달받는다."}],"\n",["$","p",null,{"children":"이후 모든 렌더링, 데이터 페칭, 라우팅 및 비즈니스 로직 실행이 전적으로 클라이언트에서 이루어진다."}],"\n",["$","p",null,{"children":["CSR의 가장 큰 장점은 초기 로딩이 완료된 후의 사용자 경험이다. 페이지 전체를 새로고침하지 않고도 동적으로 UI를 업데이트할 수 있어 매우 유동적이고 ",["$","strong",null,{"children":"앱과 같은"}]," 상호작용을 제공한다. 이 때문에 상호작용이 많은 애플리케이션에 이상적이다."]}],"\n",["$","p",null,{"children":"하지만 CSR은 명백한 단점을 가지고 있는데, 초기 로딩 시 사용자는 자바스크립트 번들이 다운로드되고 파싱되어 실행될 때까지 빈 화면이나 로딩 스피너를 보게 된다. 이는 사용자가 의미 있는 콘텐츠를 처음 보게 되는 시간(First Contentful Paint, FCP)과 LCP(Largest Contentful Paint)를 지연시켜 초기 사용자 경험을 저해한다. 또한, 검색 엔진 크롤러가 초기의 빈 HTML을 보게 되므로 SEO에 불리하다."}],"\n",["$","h2",null,{"children":"SSR"}],"\n",["$","p",null,{"children":"SSR(Server Side Rendering)은 초기 렌더링을 서버에서 수행하는 방식이다. 이 방식에서 브라우저는 서버로부터 완전한 HTML을 전달받는다. 그 결과 FCP가 매우 빠르며 SEO에도 유리하다."}],"\n",["$","p",null,{"children":["그러나 SSR에도 고유한 문제가 존재한다. 바로 ",["$","strong",null,{"children":"Hydration"}]," 과정이다. 서버에서 생성된 정적 HTML은 상호작용이 불가능하다. 이를 상호작용 가능하게 만들기 위해, 클라이언트는 SSR에 사용된 것과 동일한 자바스크립트 번들을 다운로드하고, 다시 한번 렌더링 로직을 실행하여 가상 DOM을 생성한 뒤, 이를 기존의 정적 HTML에 연결하고 이벤트 리스너를 부착해야 한다. 이 과정은 페이지가 시각적으로는 준비된 것처럼 보이지만 실제로는 상호작용이 불가능하게 만들 수 있다. 이는 FID(First Input Delay), INP(Interaction to Next Paint)와 같은 지표를 좋지 않게 만들 수 있다."]}],"\n",["$","p",null,{"children":"즉, 서버와 클라이언트에서 동일한 렌더링 작업을 두 번 수행하는 비효율이 발생한다. 또한, 사용자의 모든 상호작용에 따른 업데이트를 서버와의 왕복(Round Trip)을 필요로 하므로, 매우 동적인 애플리케이션에는 적합하지 않을 수 있다."}],"\n",["$","h2",null,{"children":"네트워크라는 병목"}],"\n",["$","p",null,{"children":"RSC는 단순히 성능을 조금 개선하려는 시도가 아니었다. 이는 클라이언트 중심 아키텍처가 본질적으로 안고 있는 몇 가지 근본적인 문제를 해결하기 위한 구조적 변화이다."}],"\n",["$","h3",null,{"children":"클라이언트-서버 데이터 워터폴"}],"\n",["$","p",null,{"children":"전통적인 클라이언트 중심 애플리케이션에서 데이터 페칭은 종종 \"워터폴\" 현상을 유발한다. 예를 들어, 사용자 프로필을 보여주는 페이지를 생각해보자. 상위 컴포넌트가 먼저 사용자 정보를 가져오기 위해 API를 호출한다. 이 요청이 완료되어 응답을 받은 후에야, 하위 컴포넌트들이 해당 사용자 ID를 사용하여 친구 목록이나 게시물 목록을 가져오는 추가 API를 호출할 수 있다. 이러한 순차적이고 의존적인 네트워크 요청들은 각각 서버와의 RTT를 필요로 하며, 특히 사용자의 물리적 위치가 서버와 멀수록 지연 시간을 더욱 길어지게 된다. 결과적으로 전체 UI가 사용자에게 보여지기까지 상당한 시간이 소요된다."}],"\n",["$","h3",null,{"children":"번들 크기"}],"\n",["$","p",null,{"children":"리액트 생태계는 풍부한 서드파티 라이브러리를 통해 발전해왔다. 마크다운 파싱을 위한 라이브러리나 HTML을 안전하게 처리하기 위한 라이브러리들은 매우 유용하지만 클라이언트 자바스크립트 번들 크기를 키우기도 한다."}],"\n",["$","p",null,{"children":"전통적인 SSR 모델에서도 이 문제는 해결되지 않는다. 상호작용이 없는 정적 콘텐츠를 렌더링하는 데 사용된 라이브러리 코드까지도, Hydration을 위해 클라이언트로 전송되어야 하기 때문이다. 이로 인해 사용자는 더 큰 자바스크립트 파일을 다운로드하고 파싱해야 하며 이는 FID를 지연시키는 직접적인 원인이 된다."}],"\n",["$","h3",null,{"children":"Hydration 오버헤드"}],"\n",["$","p",null,{"children":"SSR은 초기 렌더링 속도를 개선했지만, 근본적으로 클라이언트가 서버가 했던 작업을 다시 반복해야 하는 \"이중 작업\" 문제를 안고 있다. 이는 명백한 성능 비용이다."}],"\n",["$","p",null,{"children":"이러한 문제들은 개별적인 이슈처럼 보이지만, 사실은 하나의 근본 원인에서 파생된 문제들이다. 그 원인은 바로 전통적인 리액트 애플리케이션의 \"클라이언트 중심\" 아키텍처에 있다. 애플리케이션의 두뇌, 즉 리액트 런타임과 컴포넌트 로직이 전적으로 클라이언트에 존재하기 때문에, 클라이언트는 무언가를 하기 위해 항상 네트워크를 통해 모든 코드와 데이터를 가져와야만 했다. 리액트 팀은 서버가 단순히 정적 파일을 제공하거나 API 엔드포인트 역할만 하는 수동적인 존재로 저활용되고 있음을 인지했고, RSC는 이러한 클라이언트 중심의 가정을 근본적으로 뒤집는 철학적 전환을 의미한다. 이는 연산을 데이터가 있는 곳으로 이동시켜, 서버를 리액트 렌더링 과정의 일등 시민으로 격상시키려는 시도이다. 쉽게 말해, 이제 데이터를 가져오고 처리하는 일을 서버에서 직접 하도록 해서, 서버가 리액트 앱을 만드는 데 더 중요한 역할을 하게 된 것이다."}],"\n",["$","h2",null,{"children":"새로운 모델"}],"\n",["$","p",null,{"children":"RSC는 앞서 언급된 문제들을 해결하기 위해 새로운 아키텍처 모델을 제시한다."}],"\n",["$","p",null,{"children":"이 모델의 핵심은 개발자가 각 컴포넌트의 특성에 따라 최적의 렌더링 위치를 서버 또는 클라이언트로 직접 선택할 수 있다는 점이다. 예를 들어, 데이터베이스에서 게시물 목록을 가져와 표시하는 부분은 서버 컴포넌트로 만들어 번들 크기 증가 없이 서버에서 직접 렌더링하고, 각 게시물에 있는 좋아요 버튼과 같이 상호작용이 필요한 부분만 클라이언트 컴포넌트로 만드는 식이다."}],"\n",["$","p",null,{"children":"RSC의 목표는 클라이언트를 완전히 배제하는 것이 아니라, 서버 코드와 클라이언트 코드를 매끄럽게 조합하여 개발자가 네트워크의 존재를 거의 느끼지 못하게 만드는 것이다. 즉, 서버와 클라이언트 사이의 간극을 메우는 것을 지향한다."}],"\n",["$","p",null,{"children":"여기서 중요한 점은 RSC가 단순히 새로운 렌더링 기법이 아니라, 완전히 새로운 컴포넌트 타입을 도입했다는 것이다. SSR이 기존 컴포넌트에 적용되는 기술인 반면, RSC는 리액트의 컴포넌트 모델 자체를 '서버 컴포넌트'와 '클라이언트 컴포넌트'로 근본적으로 분리한다. 이 분리는 개발자에게 더 신중한 아키텍처 설계를 요구한다. 더 이상 모든 컴포넌트가 동일한 환경에서 동작한다고 가정할 수 없다. 각 컴포넌트의 목적(데이터 표시 vs 사용자 상호작용)을 명확히 파악하여 타입을 결정해야 하며, 이는 자연스럽게 서버 로직과 클라이언트 로직의 관심사 분리로 이어진다."}],"\n",["$","h2",null,{"children":"\"use client\""}],"\n",["$","p",null,{"children":"RSC 패러다임에서 리액트 컴포넌트는 두 가지 유형으로 나뉜다. 서버 컴포넌트는 RSC 패러다임에서 기본 단위이다. 별도의 명시가 없는 한 모든 컴포넌트가 기본적으로 서버 컴포넌트로 간주된다."}],"\n",["$","p",null,{"children":[["$","code",null,{"children":"\"use client'"}]," 지시어를 추가하면 해당 모듈의 모든 컴포넌트는 클라이언트 컴포넌트로 간주된다. 즉 코드가 자바스크립트 번들에 포함되어 클라이언트로 전송되며 서버에서 초기 HTML 렌더링을 거친 후, 클라이언트에서 Hydration을 거친다."]}],"\n",["$","p",null,{"children":["이 글에서는 자세하게 다루지는 않지만 클라이언트 컴포넌트 파일 내에서 서버 컴포넌트를 직접 사용할 수 없다. 이는 서버 컴포넌트의 코드가 클라이언트 번들에 포함될 수 없기 때문이다. 하지만, 부모 컴포넌트로부터 ",["$","code",null,{"children":"props"}],"를 통해 이미 렌더링된 서버 컴포넌트를 전달받아 렌더링하는 것은 가능하다."]}],"\n",["$","p",null,{"children":[["$","code",null,{"children":"\"use client\""}]," 지시어는 단순히 특정 컴포넌트를 클라이언트용으로 표시하는 것 이상의 의미를 갖는다. 이는 서버와 클라이언트 모듈 그래프 사이에 명확한 ",["$","strong",null,{"children":"네트워크 경계"}],"를 설정하는 역할을 한다."]}],"\n",["$","p",null,{"children":[["$","code",null,{"children":"\"use client\""}],"가 선언된 모듈은 클라이언트 경계의 시작점이 된다. 중요한 점은, 이 경계가 전이적인 특성을 가진다는 점이다. 즉, ",["$","code",null,{"children":"\"use client\""}]," 모듈이 임포트하는 다른 모듈(하위 컴포넌트 포함)은 별도의 지시어가 없더라도 자동으로 클라이언트 번들의 일부가 된다."]}],"\n",["$","p",null,{"children":["이러한 동작 방식은 마치 색칠을 하는 것처럼, 컴포넌트 의존성 트리의 특정 지점에 ",["$","code",null,{"children":"\"use client\""}],"를 도입하면, 그 영향력이 트리를 따라 아래로 전파되어 모든 자손 모듈을 클라이언트 컴포넌트로 변환시킨다. 만약 이 특성을 고려하지 않고 트리의 상위 레벨에 있는 컴포넌트에 ",["$","code",null,{"children":"\"use client\""}],"를 적용하면 그 아래의 수많은 서버 컴포넌트의 후보들이 의도치 않게 클라이언트 컴포넌트로 전환되어 RSC의 핵심 이점인 번들 크기 감소 효과가 무력화될 수 있다."]}],"\n",["$","p",null,{"children":"이 때문에 RSC 아키텍처에서는 컴포넌트 구조 설계가 매우 중요해지게 된다. 개별 컴포넌트뿐만 아니라 전체 의존성 그래프를 고려해야 한다. 상호작용이 필요한 클라이언트 컴포넌트는 가능한 한 컴포넌트 트리의 가장 아래쪽, 리프에 위치시켜 클라이언트 측 모듈 그래프의 크기를 최소화해야 한다."}],"\n",["$","p",null,{"children":["$","strong",null,{"children":[["$","code",null,{"children":"\"use client\""}],"는 렌더 트리가 아닌 모듈 의존성 트리에서 서버와 클라이언트 코드 간의 경계를 정의한다는 점을 기억해야한다."]}]}],"\n",["$","h2",null,{"children":"데이터 페칭의 재해석"}],"\n",["$","p",null,{"children":"서버 컴포넌트는 데이터 페칭 방식을 근본적으로 변화시킨다."}],"\n",["$","p",null,{"children":"페이지 이동 시 서버와의 적은 통신으로 데이터를 가져오는 것이 가장 이상적이다. 전통적인 HTML 기반 웹사이트는 가능했지만, 웹 기술이 발전하면서 많은 로직이 서버에서 클라이언트로 넘어갔다. 각 컴포넌트가 화면에 그려지기 위해서 필요한 데이터를 개별적으로 서버에 요청하기 시작했고, 이러한 방식은 클라이언트-서버 워터폴 현상을 유발했다. 하나의 요청이 끝나야 다음 요청을 보낼 수 있게 되어, 여러 번의 순차적인 왕복이 발생하고 결국 페이지 로딩 시간이 길어지는 비효율이 발생한 것이다."}],"\n",["$","p",null,{"children":"이러한 비효율을 해결하기 위해 여러 가지 방법들이 시도되었다."}],"\n",["$","p",null,{"children":"하위 컴포넌트에서 개별적으로 데이터를 요청하는 대신, 페이지의 최상위 컴포넌트에서 모든 데이터를 한 번에 요청하는 방식이 있었다. 하지만 이 방법은 하위 컴포넌트가 어떤 데이터를 필요로 하는지 상위 컴포넌트가 모두 알아야 하므로 유지보수가 어려워지는 단점이 있다."}],"\n",["$","p",null,{"children":"필요한 모든 데이터를 하나의 구조화된 쿼리로 묶어 서버에 요청하는 방식이다. 이는 여러 API를 호출할 필요 없이 단 한 번의 요청으로 모든 데이터를 가져올 수 있게 해주어 매우 효율적이지만, 별도의 GraphQL 서버를 구축해야 하는 부담이 있다."}],"\n",["$","p",null,{"children":"라우터 단에서 데이터 로딩을 처리하는 방식이다. Remix, Next.js에서 로더 함수를 통해서 페이지가 렌더링되기 전에 라우터가 해당 페이지에 필요한 모든 데이터를 로더를 통해 미리 가져온다. 클라이언트 또는 서버 양쪽에서 실행될 수 있다. 그렇지만 서버 로더의 장점이 더 많은데, 서버는 데이터베이스와 더 가까이 있기 때문에 데이터 요청-응답 속도가 빠르고 클라이언트의 느린 네트워크 환경에 영향을 받지 않는다. 또한 데이터베이스 접근 권한이나 API 키 같은 민감한 정보를 클라이언트에 노출하지 않을 수 있고 여러 데이터 요청을 서버 단에서 병렬로 처리한 후, 합쳐진 결과를 클라이언트에 한 번에 보내주므로 클라이언트-서버 워터폴 문제를 근본적으로 해결한다."}],"\n",["$","p",null,{"children":["서버 컴포넌트는 서버 로더를 컴포넌트 단위로 분해하여 조합할 수 있게 만든 것이다. 각 컴포넌트는 자신이 필요한 데이터를 서버에서 직접 가져오는 로직을 가질 수 있다. 이는 데이터를 사용하는 컴포넌트와 데이터 페칭 로직을 같은 위치에 둘 수 있게 하여 코드의 가독성과 유지보수성을 높인다. 더 이상 ",["$","code",null,{"children":"useEffect"}],"와 로딩 상태, 에러 상태를 수동으로 관리하는 복잡한 패턴이 필요 없어진다."]}],"\n",["$","p",null,{"children":"이 모든 과정이 서버에서 일어나기 때문에, 클라이언트-서버 간의 데이터 워터폴 현상을 원천적으로 방지하고, 데이터베이스나 파일 시스템과 같은 데이터 계층에 낮은 지연 시간으로 직접 접근할 수 있다."}],"\n",["$","pre",null,{"children":["$","code",null,{"className":"hljs language-tsx","children":[["$","span",null,{"className":"code-line numbered-code-line highlighted-code-line","data-line-number":"1","children":[["$","span",null,{"className":"hljs-keyword","children":"import"}]," db ",["$","span",null,{"className":"hljs-keyword","children":"from"}]," ",["$","span",null,{"className":"hljs-string","children":"'@/lib/db'"}],";"]}],"\n",["$","span",null,{"className":"code-line numbered-code-line","data-line-number":"2","children":[["$","span",null,{"className":"hljs-keyword","children":"import"}]," ",["$","span",null,{"className":"hljs-title class_","children":"AuthorDetails"}]," ",["$","span",null,{"className":"hljs-keyword","children":"from"}]," ",["$","span",null,{"className":"hljs-string","children":"'@/components/AuthorDetails'"}],";"]}],"\n",["$","span",null,{"className":"code-line numbered-code-line","data-line-number":"3"}],"\n",["$","span",null,{"className":"code-line numbered-code-line","data-line-number":"4","children":[["$","span",null,{"className":"hljs-keyword","children":"async"}]," ",["$","span",null,{"className":"hljs-keyword","children":"function"}]," ",["$","span",null,{"className":"hljs-title function_","children":"NotePage"}],"(","{ params }: { params: { id: ",["$","span",null,{"className":"hljs-params hljs-built_in","children":"string"}]," } }",") {"]}],"\n",["$","span",null,{"className":"code-line numbered-code-line highlighted-code-line","data-line-number":"5","children":["  ",["$","span",null,{"className":"hljs-keyword","children":"const"}]," note = ",["$","span",null,{"className":"hljs-keyword","children":"await"}]," db.",["$","span",null,{"className":"hljs-property","children":"notes"}],".",["$","span",null,{"className":"hljs-title function_","children":"findUnique"}],"({ ",["$","span",null,{"className":"hljs-attr","children":"where"}],": { ",["$","span",null,{"className":"hljs-attr","children":"id"}],": params.",["$","span",null,{"className":"hljs-property","children":"id"}]," } });"]}],"\n",["$","span",null,{"className":"code-line numbered-code-line","data-line-number":"6"}],"\n",["$","span",null,{"className":"code-line numbered-code-line","data-line-number":"7","children":["  ",["$","span",null,{"className":"hljs-keyword","children":"if"}]," (!note) {"]}],"\n",["$","span",null,{"className":"code-line numbered-code-line","data-line-number":"8","children":["    ",["$","span",null,{"className":"hljs-keyword","children":"return"}]," ","<",["$","span",null,{"className":"xml hljs-tag hljs-name","children":"div"}],">","Note not found.","</",["$","span",null,{"className":"xml hljs-tag hljs-name","children":"div"}],">",";"]}],"\n",["$","span",null,{"className":"code-line numbered-code-line","data-line-number":"9","children":"  }"}],"\n",["$","span",null,{"className":"code-line numbered-code-line","data-line-number":"10"}],"\n",["$","span",null,{"className":"code-line numbered-code-line","data-line-number":"11","children":["  ",["$","span",null,{"className":"hljs-keyword","children":"return"}]," ("]}],"\n",["$","span",null,{"className":"code-line numbered-code-line","data-line-number":"12","children":["    ","<",["$","span",null,{"className":"xml hljs-tag hljs-name","children":"article"}],">"]}],"\n",["$","span",null,{"className":"code-line numbered-code-line","data-line-number":"13","children":["      ","<",["$","span",null,{"className":"xml hljs-tag hljs-name","children":"h1"}],">","{note.title}","</",["$","span",null,{"className":"xml hljs-tag hljs-name","children":"h1"}],">"]}],"\n",["$","span",null,{"className":"code-line numbered-code-line","data-line-number":"14","children":["      ","<",["$","span",null,{"className":"xml hljs-tag hljs-name","children":"AuthorDetails"}]," ",["$","span",null,{"className":"xml hljs-tag hljs-attr","children":"authorId"}],"=",["$","span",null,{"className":"xml hljs-tag hljs-string","children":"{note.authorId}"}]," />"]}],"\n",["$","span",null,{"className":"code-line numbered-code-line","data-line-number":"15","children":["      ","<",["$","span",null,{"className":"xml hljs-tag hljs-name","children":"section"}],">","{note.content}","</",["$","span",null,{"className":"xml hljs-tag hljs-name","children":"section"}],">"]}],"\n",["$","span",null,{"className":"code-line numbered-code-line","data-line-number":"16","children":["    ","</",["$","span",null,{"className":"xml hljs-tag hljs-name","children":"article"}],">"]}],"\n",["$","span",null,{"className":"code-line numbered-code-line","data-line-number":"17","children":"  );"}],"\n",["$","span",null,{"className":"code-line numbered-code-line","data-line-number":"18","children":"}"}],"\n",["$","span",null,{"className":"code-line numbered-code-line","data-line-number":"19"}],"\n",["$","span",null,{"className":"code-line numbered-code-line","data-line-number":"20","children":[["$","span",null,{"className":"hljs-keyword","children":"export"}]," ",["$","span",null,{"className":"hljs-keyword","children":"default"}]," ",["$","span",null,{"className":"hljs-title class_","children":"NotePage"}],";"]}],"\n"]}]}],"\n",["$","p",null,{"children":"웹 성능 최적화에서 핵심은 클라이언트와 서버의 통신을 통해서 생기는 네트워크 왕복 횟수를 줄이는 것이다. 이를 위해 데이터 로딩의 책임을 클라이언트에서 서버로 옮기는 것이 중요하다. 전통적인 HTML 방식의 단순함과 효율성을 현대적인 컴포넌트 기반 아키텍처에 접목하려는 시도를 통해서 서버 컴포넌트가 탄생한 것이다."}],"\n",["$","p",null,{"children":"결론적으로 UI 로직과 데이터 요구사항을 한곳에 모으고 데이터 로딩의 효율성을 높이고자 한 것이다."}],"\n",["$","h2",null,{"children":"마지막으로"}],"\n",["$","p",null,{"children":"RSC는 단순히 새로운 렌더링 기술이 아니라, 기존 클라이언트 중심 아키텍처가 가진 데이터 워터폴과 번들 크기 문제를 근본적으로 해결하려는 패러다임의 전환이다."}],"\n",["$","p",null,{"children":"웹 애플리케이션의 성능과 사용자 경험을 끌어올리려고 하는 노력이며, 서버-클라이언트 이중성을 이해하고 각 컴포넌트의 책임과 경계를 설계하는 능력이 더욱 더 중요해질 것 같다."}],"\n",["$","h2",null,{"children":"참고자료"}],"\n",["$","ul",null,{"children":["\n",["$","li",null,{"children":["$","a",null,{"href":"https://react.dev/reference/rsc","children":"Server Components"}]}],"\n",["$","li",null,{"children":["$","a",null,{"href":"https://overreacted.io/one-roundtrip-per-navigation/","children":"One Roundtrip Per Navigation"}]}],"\n"]}]]}],["$","hr",null,{"className":"border-border-primary my-8 w-full border-t-[0.5px]"}],["$","$L1e",null,{}]]}],["$","aside",null,{"className":"hidden xl:block","children":["$","$L1f",null,{"className":"sticky top-4 ml-8 max-h-[calc(100vh-2rem)] w-48 overflow-auto","content":"$20"}]}]]}]}]
+18:[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]
 15:null
-19:[["$","title","0",{"children":"React Server Component | cjeongmin"}],["$","meta","1",{"name":"description","content":"A blog by cjeongmin"}],["$","meta","2",{"property":"og:title","content":"React Server Component"}],["$","meta","3",{"property":"og:description","content":"A blog by cjeongmin"}],["$","meta","4",{"name":"twitter:card","content":"summary"}],["$","meta","5",{"name":"twitter:title","content":"React Server Component"}],["$","meta","6",{"name":"twitter:description","content":"A blog by cjeongmin"}],["$","link","7",{"rel":"icon","href":"/favicon.ico","type":"image/x-icon","sizes":"2267x2149"}]]
+16:null
+1a:[["$","title","0",{"children":"React Server Component | cjeongmin"}],["$","meta","1",{"name":"description","content":"A blog by cjeongmin"}],["$","meta","2",{"property":"og:title","content":"React Server Component"}],["$","meta","3",{"property":"og:description","content":"A blog by cjeongmin"}],["$","meta","4",{"name":"twitter:card","content":"summary"}],["$","meta","5",{"name":"twitter:title","content":"React Server Component"}],["$","meta","6",{"name":"twitter:description","content":"A blog by cjeongmin"}],["$","link","7",{"rel":"icon","href":"/favicon.ico","type":"image/x-icon","sizes":"2267x2149"}]]
